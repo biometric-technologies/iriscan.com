@@ -156,5 +156,13 @@
   "user": "filipp_roman_photography",
   "id": "w7SbnVlCQKg",
   "crop": "crop=focalpoint&fp-x=0.5&fp-y=0.55&fp-z=1.2"
+ },
+ {
+  "file": "man-both-eyes-portrait",
+  "src": "https://images.unsplash.com/photo-1547729047-a1f1532c9a38",
+  "author": "Jaime Lopes",
+  "user": "jaimelopes",
+  "id": "Wg52NDKBW1Y",
+  "crop": "crop=focalpoint&fp-x=0.5&fp-y=0.33&fp-z=1.5"
  }
 ]

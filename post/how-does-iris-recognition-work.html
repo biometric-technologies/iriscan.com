@@ -22,9 +22,9 @@
 <meta property="og:title" content="How Does Iris Recognition Work? Step by Step | Iriscan">
 <meta property="og:description" content="From an eye image to a match decision: capture, segmentation, unwrapping, encoding and comparison, and the choices that matter when you deploy it.">
 <meta property="og:url" content="https://www.iriscan.com/post/how-does-iris-recognition-work">
-<meta property="og:image" content="https://www.iriscan.com/assets/img/blog/grey-eye-closeup.jpg">
+<meta property="og:image" content="https://www.iriscan.com/assets/img/blog/golden-iris-macro.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "How Iris Recognition Works", "datePublished": "2026-08-20", "dateModified": "2026-08-20", "author": {"@type": "Person", "name": "Artem Poliakov", "jobTitle": "CEO, Iriscan", "url": "https://www.iriscan.com"}, "publisher": {"@type": "Organization", "name": "Biometric Technologies OÜ", "url": "https://www.iriscan.com"}, "image": "https://www.iriscan.com/assets/img/blog/grey-eye-closeup.jpg", "mainEntityOfPage": "https://www.iriscan.com/post/how-does-iris-recognition-work", "description": "From an eye image to a match decision: capture, segmentation, unwrapping, encoding and comparison, and the choices that matter when you deploy it."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "How Iris Recognition Works", "datePublished": "2026-08-20", "dateModified": "2026-08-20", "author": {"@type": "Person", "name": "Artem Poliakov", "jobTitle": "CEO, Iriscan", "url": "https://www.iriscan.com"}, "publisher": {"@type": "Organization", "name": "Biometric Technologies OÜ", "url": "https://www.iriscan.com"}, "image": "https://www.iriscan.com/assets/img/blog/golden-iris-macro.jpg", "mainEntityOfPage": "https://www.iriscan.com/post/how-does-iris-recognition-work", "description": "From an eye image to a match decision: capture, segmentation, unwrapping, encoding and comparison, and the choices that matter when you deploy it."}</script>
 </head>
 <body class="post-page">
 <header>
@@ -85,7 +85,7 @@
 <div class="article-outer"><article class="article">
 <div class="meta-top"><span>Aug 20, 2026 &middot; 5 min read</span></div>
 <h1>How Iris Recognition Works</h1>
-<figure class="hero-photo"><img src="../assets/img/blog/grey-eye-closeup.jpg" alt="Close-up of a grey-blue eye" width="1200" height="750"><figcaption class="credit">Photo: <a href="https://unsplash.com/@filipp_roman_photography?utm_source=iriscan&amp;utm_medium=referral" rel="nofollow noopener">Filipp Romanovski</a> / <a href="https://unsplash.com/?utm_source=iriscan&amp;utm_medium=referral" rel="nofollow noopener">Unsplash</a></figcaption></figure>
+<figure class="hero-photo"><img src="../assets/img/blog/golden-iris-macro.jpg" alt="Macro photo of a golden-brown iris" width="1200" height="750"><figcaption class="credit">Photo: <a href="https://unsplash.com/@budanovamrus?utm_source=iriscan&amp;utm_medium=referral" rel="nofollow noopener">Maria Budanova</a> / <a href="https://unsplash.com/?utm_source=iriscan&amp;utm_medium=referral" rel="nofollow noopener">Unsplash</a></figcaption></figure>
 
 <p class="lead">How does a machine recognize a person by the eye? The approach has not changed much since John Daugman described it in the 1990s, and our Cloud Iris API follows it too. The system takes a near-infrared picture of the eye, finds the iris, unrolls it into a rectangle, turns its texture into bits and compares these bits with the bits of other people. Each step is simple to describe. The accuracy of the whole system depends on how carefully each one is implemented, so below I go through them one by one.</p>
 
