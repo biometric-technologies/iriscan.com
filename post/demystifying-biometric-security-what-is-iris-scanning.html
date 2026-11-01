@@ -22,9 +22,23 @@
 <meta property="og:title" content="What Is Iris Scanning? Answers for People Who Have to Deploy It | Iriscan">
 <meta property="og:description" content="What an iris scanner actually captures, who it works for, what it costs, what gets stored, and where iris scanning is already used at scale.">
 <meta property="og:url" content="https://www.iriscan.com/post/demystifying-biometric-security-what-is-iris-scanning">
-<meta property="og:image" content="https://www.iriscan.com/assets/img/blog/john-daugman-portrait.svg">
+<meta property="og:image" content="https://www.iriscan.com/assets/img/blog/john-daugman-portrait.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="430">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "What Is Iris Scanning? Answers for People Who Have to Deploy It", "datePublished": "2026-09-14", "dateModified": "2026-09-14", "author": {"@type": "Person", "name": "Artem Poliakov", "jobTitle": "CEO, Iriscan", "url": "https://www.iriscan.com"}, "publisher": {"@type": "Organization", "name": "Biometric Technologies OÜ", "url": "https://www.iriscan.com"}, "image": "https://www.iriscan.com/assets/img/blog/john-daugman-portrait.svg", "mainEntityOfPage": "https://www.iriscan.com/post/demystifying-biometric-security-what-is-iris-scanning", "description": "What an iris scanner actually captures, who it works for, what it costs, what gets stored, and where iris scanning is already used at scale."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "What Is Iris Scanning? Answers for People Who Have to Deploy It", "datePublished": "2026-09-14", "dateModified": "2026-09-14", "author": {"@type": "Person", "name": "Artem Poliakov", "jobTitle": "CEO, Iriscan", "url": "https://www.iriscan.com"}, "publisher": {"@type": "Organization", "name": "Biometric Technologies OÜ", "url": "https://www.iriscan.com"}, "image": "https://www.iriscan.com/assets/img/blog/john-daugman-portrait.jpg", "mainEntityOfPage": "https://www.iriscan.com/post/demystifying-biometric-security-what-is-iris-scanning", "description": "What an iris scanner actually captures, who it works for, what it costs, what gets stored, and where iris scanning is already used at scale."}</script>
+<style>
+.article .daugman-intro{display:grid;grid-template-columns:minmax(0,430px) minmax(0,1fr);gap:2rem;align-items:start;max-width:1000px;margin:1.4rem auto 2rem}
+.article figure.daugman-portrait{width:100%;max-width:430px;margin:0}
+.article .daugman-portrait img{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain;border-radius:10px}
+.article .daugman-portrait .credit{text-align:left}
+.article .daugman-copy{min-width:0}
+.article .daugman-copy>p:first-child{margin-top:0}
+.article .daugman-copy p{text-align:left}
+.article .daugman-copy h2{text-align:left;margin-top:1.6rem}
+@media(max-width:900px){.article .daugman-intro{grid-template-columns:minmax(0,1fr);gap:1.6rem}.article figure.daugman-portrait{margin:0 auto}}
+</style>
 </head>
 <body class="post-page">
 <header>
@@ -85,8 +99,9 @@
 <div class="article-outer"><article class="article">
 <div class="meta-top"><span>Sep 14, 2026 &middot; 4 min read</span></div>
 <h1>What Is Iris Scanning? Answers for People Who Have to Deploy It</h1>
-<figure class="hero-photo"><img src="../assets/img/blog/john-daugman-portrait.svg" alt="John Daugman, inventor of the iris recognition algorithm" width="430" height="630" style="object-position:50% 10%"><figcaption class="credit">John Daugman, inventor of the iris recognition algorithm. Photo source: <a href="https://www.invent.org/inductees/john-g-daugman" target="_blank" rel="noopener">National Inventors Hall of Fame (United States)</a>.</figcaption></figure>
-
+<div class="daugman-intro">
+<figure class="daugman-portrait"><img src="../assets/img/blog/john-daugman-portrait.jpg" alt="John Daugman, inventor of the iris recognition algorithm" width="430" height="630"><figcaption class="credit">John Daugman, inventor of the iris recognition algorithm. Photo source: <a href="https://www.invent.org/inductees/john-g-daugman" target="_blank" rel="noopener">National Inventors Hall of Fame (United States)</a>.</figcaption></figure>
+<div class="daugman-copy">
 <p class="lead">Iris scanning means photographing the colored ring of the eye in infrared light and using its texture to recognize a person. When we at Iriscan talk to project teams, the questions are rarely about the algorithm. Is it safe for the eyes? Will it work with glasses? What hardware is needed and what exactly is stored? I collected the answers below.</p>
 
 <h2>Is it a laser? Is it safe?</h2>
@@ -94,6 +109,8 @@
 
 <h2>What does the scanner see?</h2>
 <p>A grayscale image of the eye in which the iris shows its fine structure: crypts, furrows, rings and freckles. Eye color plays no role, because in infrared light both dark and light irises show their texture. From this image the software builds an iris code, a string of bits, and the image itself can be discarded. How it works is described in <a href="/post/how-does-iris-recognition-work">how iris recognition works</a>.</p>
+</div>
+</div>
 
 <figure><img src="../assets/img/blog/blue-grey-eye-closeup.jpg" alt="Close-up of a human iris" width="1200" height="750" loading="lazy"><figcaption>In visible light the iris shows its color. Scanners use infrared, where the structure is visible even in very dark eyes. Photo: <a href="https://unsplash.com/@victorfreitas?utm_source=iriscan&amp;utm_medium=referral" rel="nofollow noopener">Victor Freitas</a> / <a href="https://unsplash.com/?utm_source=iriscan&amp;utm_medium=referral" rel="nofollow noopener">Unsplash</a></figcaption></figure>
 
