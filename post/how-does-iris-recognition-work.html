@@ -98,7 +98,7 @@
 <p>Then the software locates two boundaries: the pupil (inner) and the limbus, where the iris meets the white of the eye (outer). Classic algorithms fit circles with an integro-differential operator or a Hough transform. Newer ones use neural networks and fit ellipses, which works better when the person does not look straight into the camera.</p>
 <p>It also marks what is not iris: eyelids, eyelashes, reflections of the illuminator. These areas go into a mask. They are not deleted, just excluded from the comparison later.</p>
 
-<figure><img src="../assets/img/iris-recognition-pipeline.jpg" alt="Iris recognition pipeline: capture, segmentation, unwrapping and encoding into an iris code" loading="lazy"><figcaption>From an eye image to an iris code and its mask.</figcaption></figure>
+<figure><img src="../assets/img/iris-recognition-pipeline.svg" alt="Iris recognition pipeline: capture, segmentation, unwrapping and encoding into an iris code" loading="lazy"><figcaption>From an eye image to an iris code and its mask.</figcaption></figure>
 
 <h2>3. Unwrapping</h2>
 <p>The pupil dilates and contracts, and the eye is never at exactly the same distance from the camera. So how to compare two irises? The ring between the two boundaries is mapped onto a fixed rectangle: angle along one axis, distance from pupil to limbus along the other. This is Daugman's "rubber sheet" model. After it, a point on the iris lands in the same cell of the rectangle regardless of the pupil size.</p>
