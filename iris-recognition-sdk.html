@@ -128,12 +128,6 @@ val best  = sdk.iris().matcher().identify(template, gallery)     // 1:N, null if
 <pre><code>pod 'BiometricSdk'</code></pre>
 
 <h2>Accuracy</h2>
-<p>On the public CASIA-Iris-Interval dataset (393 eyes, 2,639 images, all genuine and impostor pairs) the current version reaches:</p>
-<ul>
-<li>Equal error rate: <b>4.2%</b></li>
-<li>False non-match rate at a false match rate of 0.1%: <b>5.0%</b></li>
-<li>Failure to enroll: <b>0.11%</b></li>
-</ul>
 <p>Results depend on the camera, lighting and the people you enroll. The SDK includes the benchmark we use, so you can run it on images from your own scanners and pick the threshold that fits your false match budget.</p>
 
 <h2>Supported USB iris scanners</h2>
