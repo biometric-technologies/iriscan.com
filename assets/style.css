@@ -151,11 +151,21 @@ section{padding:6.5rem 0}
 .post-card:hover{transform:translateY(-4px);border-color:#43464d;box-shadow:0 16px 32px rgba(0,0,0,.35);text-decoration:none}
 .post-card .pc-img{aspect-ratio:16/10;overflow:hidden;background:#101014;flex:none}
 .post-card .pc-img img{display:block;width:100%;height:100%;object-fit:cover;border-radius:0}
-/* drawn tiles on transparent backgrounds: a quiet blue glow instead of flat black */
-.post-card .pc-img.art{background:
-  radial-gradient(circle at 18% 12%,rgba(92,200,255,.16),transparent 55%),
-  radial-gradient(circle at 88% 92%,rgba(28,119,195,.24),transparent 60%),
-  linear-gradient(160deg,#151b26,#101218 70%)}
+/* drawn tiles on transparent backgrounds: graphite with a fine black-sand grain and a soft sheen
+   that slides across on hover */
+.post-card .pc-img.art{position:relative;isolation:isolate;
+  background:
+    radial-gradient(120% 90% at 20% 0%,rgba(255,255,255,.07),transparent 55%),
+    radial-gradient(90% 80% at 100% 100%,rgba(92,120,160,.10),transparent 60%),
+    linear-gradient(155deg,#2a2c30 0%,#1a1b1e 45%,#0e0f11 100%)}
+.post-card .pc-img.art::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.55;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay}
+.post-card .pc-img.art::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.07) 47%,rgba(170,200,255,.05) 52%,transparent 64%) 0 0/250% 100% no-repeat;
+  background-position:100% 0;transition:background-position 1.4s ease}
+.post-card:hover .pc-img.art::after{background-position:0 0}
+.post-card .pc-img.art img{position:relative}
 .post-card .pc-img img.contain{object-fit:contain;padding:1.4rem}
 .post-card .pc-img img.device-thumb{object-fit:contain;padding:.6rem 1rem;
   background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.14),rgba(255,255,255,0) 62%),#111214;
