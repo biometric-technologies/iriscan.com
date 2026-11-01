@@ -141,5 +141,12 @@
   "user": "victorfreitas",
   "id": "B0zAPSrEcFw",
   "crop": "crop=focalpoint&fp-x=0.45&fp-y=0.52&fp-z=1.25"
+ },
+ {
+  "file": "john-daugman-portrait",
+  "embedded_jpeg": "john-daugman-portrait.svg",
+  "source": "https://www.invent.org/inductees/john-g-daugman",
+  "source_organization": "National Inventors Hall of Fame",
+  "source_country": "United States"
  }
 ]
