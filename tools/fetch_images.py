@@ -14,7 +14,10 @@ for item in json.loads((out / "sources.json").read_text()):
         target = out / f"{item['file']}{suffix}.jpg"
         if target.exists():
             continue
-        url = f"{item['src']}?w={w}&h={h}&fit=crop&crop=faces,entropy&q={q}&fm=jpg"
+        # "crop" in sources.json overrides the automatic crop, e.g. a focal point with zoom:
+        # "crop=focalpoint&fp-x=0.67&fp-y=0.4&fp-z=1.9" (imgix parameters, which Unsplash serves)
+        crop = item.get("crop", "crop=faces,entropy")
+        url = f"{item['src']}?w={w}&h={h}&fit=crop&{crop}&q={q}&fm=jpg"
         req = urllib.request.Request(url, headers={"User-Agent": "iriscan.com image fetch"})
         with urllib.request.urlopen(req, timeout=60) as r:
             target.write_bytes(r.read())
