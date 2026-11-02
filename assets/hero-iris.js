@@ -1,14 +1,14 @@
-/* Home hero background: an iris drawn in dots, slowly turning.
+/* Home hero background: an iris and a drift of gold dust, drawn in dots.
  *
- * The dots sit on a polar grid. Their brightness follows the patterns of a real iris, so the
- * picture reads as an eye and not as a random particle field: radial fibres, a zigzag collarette
- * a third of the way out, dark crypts in the outer zone, concentric contraction furrows near the
- * edge, and a darker limbus. The iris is cut into rings that turn at different speeds and in
- * alternating directions.
+ * The iris is built the way an illustrator paints one: a blue base, warmer towards the pupil, a
+ * haze of warm dots around the pupil, curved fibres that cross each other into a lattice, a star
+ * of light spikes (the collarette) around the pupil, dark radial streaks, and a dark limbus. All of
+ * that is drawn once into an offscreen canvas.
  *
- * Every ring is drawn once into its own offscreen canvas; a frame only rotates and copies those
- * few images, so the animation costs almost nothing. It stops while the hero is off screen, and
- * draws a single still frame for people who asked their system for reduced motion.
+ * Only the gold dust moves, and barely: each grain drifts a few pixels a second along the plume
+ * and slowly brightens and fades. It is a background, so it should be felt rather than watched.
+ * The animation stops while the hero is off screen and is replaced by one still frame for people
+ * who asked their system for reduced motion.
  */
 (function () {
   var host = document.querySelector('.hero-iris');
@@ -19,124 +19,148 @@
   canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%';
   host.appendChild(canvas);
   var ctx = canvas.getContext('2d');
-
-  var BANDS = 7;            // rings that turn separately
-  var STEP = 6.5;           // distance between dots, CSS pixels
   var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // a small seeded generator, so the iris looks the same on every visit
-  function rng(seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
+  // a small seeded generator, so the picture is the same on every visit
+  var seed;
+  function rand() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
 
-  var dpr, W, H, cx, cy, R, rp, bands, speeds, crypts, rand;
+  var dpr, W, H, cx, cy, R, rp, layer, dust;
+
+  function dot(g, x, y, r, color, a) {
+    g.globalAlpha = a; g.fillStyle = color;
+    g.beginPath(); g.arc(x, y, r, 0, 6.2832); g.fill();
+  }
 
   function layout() {
     dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     W = host.clientWidth; H = host.clientHeight;
     canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
     var wide = W > 900;
-    R = wide ? Math.min(H * 0.47, W * 0.3) : Math.min(W * 0.62, H * 0.42);
-    cx = wide ? W - R - Math.max(40, W * 0.06) : W * 0.62;
+    var outer = wide ? Math.min(H * 0.37, W * 0.22) : Math.min(W * 0.6, H * 0.38);
+    R = outer;                        // iris radius
+    rp = R * 0.27;                    // pupil
+    cx = wide ? W - outer - Math.max(60, W * 0.08) : W * 0.62;
     cy = wide ? H * 0.5 : H * 0.42;
-    rp = R * 0.22;          // pupil radius
-    rand = rng(20261102);
-    crypts = [];
-    for (var i = 0; i < 26; i++) {
-      crypts.push({ a: rand() * Math.PI * 2, u: 0.4 + rand() * 0.38,
-                    da: 0.05 + rand() * 0.09, du: 0.04 + rand() * 0.08 });
-    }
-    build();
+    seed = 20261102;
+    buildLayer();
+    buildDust();
   }
 
-  // brightness 0..1 of a dot at relative radius u (0 = pupil edge, 1 = limbus) and angle a
-  function iris(u, a) {
-    // collarette: a zigzag ring that splits the pupillary and the ciliary zone
-    var uc = 0.3 + 0.03 * Math.sin(a * 9) + 0.015 * Math.sin(a * 23 + 1);
-    var inner = u < uc;
-    // radial fibres, finer and more regular near the pupil
-    var twist = 1.4 * Math.sin(a * 3 + u * 4);
-    var f1 = 0.5 + 0.5 * Math.sin(a * (inner ? 90 : 56) + twist);
-    var f2 = 0.5 + 0.5 * Math.sin(a * 37 - twist * 0.7 + u * 6);
-    var v = 0.15 + 0.85 * Math.pow(0.6 * f1 + 0.4 * f2, 2.6);
-    if (Math.abs(u - uc) < 0.022) v = Math.max(v, 0.95);
-    if (!inner) {
-      for (var i = 0; i < crypts.length; i++) {
-        var c = crypts[i];
-        var da = Math.atan2(Math.sin(a - c.a), Math.cos(a - c.a)) / c.da, du = (u - c.u) / c.du;
-        var d = da * da + du * du;
-        if (d < 1) { v = d < 0.65 ? v * 0.05 : Math.min(1, v * 1.6); break; }   // a hole with a lighter rim
-      }
-      // contraction furrows: thin dark circles near the edge
-      var w = 0.006 * Math.sin(a * 14);
-      if (Math.abs(u - 0.8 - w) < 0.012 || Math.abs(u - 0.89 + w) < 0.01) v *= 0.25;
+  function buildLayer() {
+    layer = document.createElement('canvas');
+    layer.width = canvas.width; layer.height = canvas.height;
+    var g = layer.getContext('2d');
+    g.scale(dpr, dpr);
+
+    // the iris: a smooth blue base, warmer towards the pupil, darker at the limbus
+    var base = g.createRadialGradient(cx, cy, rp, cx, cy, R);
+    base.addColorStop(0, '#5a4a2a'); base.addColorStop(0.3, '#3b4d55'); base.addColorStop(0.75, '#22476e');
+    base.addColorStop(0.95, '#162c45'); base.addColorStop(1, '#0f1c2b');
+    g.globalAlpha = 0.38; g.fillStyle = base;
+    g.beginPath(); g.arc(cx, cy, R, 0, 6.2832); g.fill();
+
+    function inIris(x, y) { var d = Math.hypot(x - cx, y - cy); return d > rp && d < R; }
+    function at(r, a) { return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; }
+
+    // a warm haze around the pupil, in fine dots
+    for (var i = 0; i < R * R * 0.9; i++) {
+      var u = Math.pow(rand(), 1.6) * 0.55, a = rand() * 6.2832, r = rp + u * (R - rp), q = at(r, a);
+      dot(g, q[0], q[1], 0.45 + rand() * 0.35, '#d9b45e', 0.05 + 0.3 * (1 - u / 0.55));
     }
-    if (u > 0.93) v *= 0.55;                               // the darker limbus
-    return v;
+    // blue speckle over the whole iris
+    for (i = 0; i < R * R * 1.2; i++) {
+      u = Math.sqrt(rand()); a = rand() * 6.2832; r = rp + u * (R - rp); q = at(r, a);
+      dot(g, q[0], q[1], 0.4 + rand() * 0.4, u < 0.35 ? '#9fb7a8' : '#6fa7dc', 0.08 + 0.26 * rand());
+    }
+    // crossing fibres: curves that leave the pupil and turn left or right on the way out, which
+    // weaves the lattice of a real iris
+    var fibres = Math.round(R * 3.2);
+    for (var f = 0; f < fibres; f++) {
+      var a0 = rand() * 6.2832, turn = (rand() < 0.5 ? -1 : 1) * (0.35 + rand() * 0.5), br = 0.4 + rand() * 0.6;
+      for (r = rp + 2; r < R * 0.97; r += 1.9) {
+        u = (r - rp) / (R - rp);
+        q = at(r, a0 + turn * Math.sin(u * Math.PI * 0.5));
+        if (rand() < 0.25) continue;
+        dot(g, q[0], q[1], 0.5, u < 0.3 ? '#efdcaa' : '#cfe4f6', (0.1 + 0.32 * br) * (1 - 0.35 * u));
+      }
+    }
+    // the collarette: a star of light spikes around the pupil
+    var spikes = 30;
+    for (var sp = 0; sp < spikes; sp++) {
+      var ac = (sp + rand() * 0.6) / spikes * 6.2832, reach = 0.22 + rand() * 0.2, w0 = 0.07 + rand() * 0.05;
+      for (var j = 0; j < 260; j++) {
+        var tt = rand(), ww = (rand() * 2 - 1) * w0 * (1 - tt) * (1 - tt * 0.4);
+        r = rp + 1 + tt * reach * (R - rp); q = at(r, ac + ww);
+        dot(g, q[0], q[1], 0.45 + rand() * 0.35, tt < 0.6 ? '#f2dca0' : '#e8eef0', 0.12 + 0.45 * (1 - tt));
+      }
+    }
+    // dark radial streaks in the outer iris
+    for (var d = 0; d < 46; d++) {
+      var ad = rand() * 6.2832, from = 0.35 + rand() * 0.3, to = from + 0.2 + rand() * 0.35;
+      for (r = rp + from * (R - rp); r < rp + Math.min(to, 0.98) * (R - rp); r += 1.6) {
+        q = at(r, ad + (rand() - 0.5) * 0.012);
+        dot(g, q[0], q[1], 0.9, '#0d1826', 0.35);
+      }
+    }
+    // the limbus: a dark ring at the edge of the iris
+    var lim = g.createRadialGradient(cx, cy, R * 0.82, cx, cy, R * 1.01);
+    lim.addColorStop(0, 'rgba(10,18,30,0)'); lim.addColorStop(0.8, 'rgba(10,18,30,0.7)'); lim.addColorStop(1, 'rgba(10,18,30,0)');
+    g.globalAlpha = 1; g.fillStyle = lim;
+    g.beginPath(); g.arc(cx, cy, R * 1.01, 0, 6.2832); g.fill();
+
+    // the pupil, with a soft edge
+    var pup = g.createRadialGradient(cx, cy, rp * 0.88, cx, cy, rp * 1.1);
+    pup.addColorStop(0, '#05060a'); pup.addColorStop(1, 'rgba(5,6,10,0)');
+    g.fillStyle = pup; g.beginPath(); g.arc(cx, cy, rp * 1.1, 0, 6.2832); g.fill();
+    g.globalAlpha = 1;
   }
 
-  function build() {
-    bands = []; speeds = [];
-    var rings = [];
-    for (var r = rp + STEP; r <= R; r += STEP) rings.push(r);
-    var per = Math.ceil(rings.length / BANDS);
-    for (var b = 0; b < BANDS; b++) {
-      // each band only as big as its outer ring: copying the images is what a frame costs
-      var outer = rings[Math.min(rings.length, (b + 1) * per) - 1] + 4;
-      var off = document.createElement('canvas');
-      off.width = off.height = Math.ceil(outer * 2 * dpr);
-      var g = off.getContext('2d');
-      g.scale(dpr, dpr);
-      g.translate(outer, outer);
-      for (var k = b * per; k < Math.min(rings.length, (b + 1) * per); k++) {
-        var rr = rings[k], u = (rr - rp) / (R - rp);
-        var n = Math.floor(2 * Math.PI * rr / STEP);
-        var phase = rand() * 6.283;
-        for (var j = 0; j < n; j++) {
-          if (rand() < 0.12) continue;                     // gaps keep it organic
-          var a = phase + 2 * Math.PI * j / n;
-          var v = iris(u, a);
-          var rad = 0.45 + 0.75 * v * (0.75 + 0.5 * u);     // CSS pixels
-          var alpha = 0.07 + 0.6 * v * (1 - 0.3 * u);
-          var rj = rr + (rand() - 0.5) * 2.2;
-          g.fillStyle = u < 0.3 ? 'rgba(120,200,255,' + alpha.toFixed(3) + ')'
-                                : 'rgba(70,150,220,' + alpha.toFixed(3) + ')';
-          g.beginPath(); g.arc(rj * Math.cos(a), rj * Math.sin(a), rad, 0, 6.2832); g.fill();
-        }
-      }
-      bands.push(off);
-      // radians per second: one turn in 3 to 7 minutes, alternating directions
-      speeds.push((b % 2 ? -1 : 1) * (2 * Math.PI) / (180 + b * 40));
+  // gold dust in two diagonal plumes through the flower, from the upper left to the lower right
+  function buildDust() {
+    dust = [];
+    var dx = Math.cos(0.5), dy = Math.sin(0.5);                   // the plume direction
+    for (var i = 0; i < 700; i++) {
+      var side = rand() < 0.5 ? -1 : 1;
+      var along = (rand() - 0.5) * R * 5.2;
+      var spread = (Math.pow(rand(), 1.8) * R * 1.1 + R * 0.75) * side * (rand() < 0.2 ? 0.4 : 1);
+      var flake = rand() < 0.05;
+      dust.push({
+        x: cx + dx * along - dy * spread * 0.55, y: cy + dy * along + dx * spread * 0.55,
+        r: flake ? 1.4 + rand() * 1.4 : 0.35 + rand() * 0.8,
+        a: flake ? 0.35 + rand() * 0.25 : 0.15 + rand() * 0.45,
+        v: 1.5 + rand() * 3.5,                                    // pixels per second, along the plume
+        tw: 6 + rand() * 10, ph: rand() * 6.2832
+      });
     }
+    dust.dx = dx; dust.dy = dy; dust.span = R * 5.2;
   }
 
   function frame(t) {
     var s = t / 1000;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.globalAlpha = 0.72;                 // a background: muted
+    ctx.drawImage(layer, 0, 0);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, W, H);
-    // a faint glow behind the iris
-    var glow = ctx.createRadialGradient(cx, cy, rp, cx, cy, R * 1.25);
-    glow.addColorStop(0, 'rgba(28,119,195,0.10)'); glow.addColorStop(1, 'rgba(10,50,143,0)');
-    ctx.fillStyle = glow; ctx.fillRect(0, 0, W, H);
-    var breathe = 1 + 0.012 * Math.sin(s * 2 * Math.PI / 11);
-    for (var b = 0; b < bands.length; b++) {
-      ctx.save();
-      ctx.translate(cx, cy); ctx.rotate(s * speeds[b]); ctx.scale(breathe / dpr, breathe / dpr);
-      ctx.drawImage(bands[b], -bands[b].width / 2, -bands[b].height / 2);
-      ctx.restore();
+    ctx.fillStyle = '#d6b46a';
+    for (var i = 0; i < dust.length; i++) {
+      var p = dust[i];
+      // drift along the plume and wrap around, so the plume never empties
+      var m = ((p.v * s) % dust.span);
+      var x = p.x + dust.dx * m, y = p.y + dust.dy * m;
+      if ((x - cx) * dust.dx + (y - cy) * dust.dy > dust.span / 2) { x -= dust.dx * dust.span; y -= dust.dy * dust.span; }
+      if (x < -5 || y < -5 || x > W + 5 || y > H + 5) continue;
+      ctx.globalAlpha = p.a * (0.55 + 0.45 * Math.sin(s * 6.2832 / p.tw + p.ph));
+      ctx.beginPath(); ctx.arc(x, y, p.r, 0, 6.2832); ctx.fill();
     }
-    // pupil
-    ctx.fillStyle = '#0b0c0f';
-    ctx.beginPath(); ctx.arc(cx, cy, rp * breathe, 0, 6.2832); ctx.fill();
-    ctx.strokeStyle = 'rgba(92,200,255,0.18)'; ctx.lineWidth = 1;
-    ctx.stroke();
-    ctx.fillStyle = 'rgba(232,246,255,0.35)';
-    ctx.beginPath(); ctx.arc(cx - rp * 0.3, cy - rp * 0.34, Math.max(2.5, rp * 0.06), 0, 6.2832); ctx.fill();
+    ctx.globalAlpha = 1;
   }
 
-  var visible = true, raf = 0;
-  var last = -1e9;
+  var visible = true, raf = 0, last = -1e9;
   function loop(t) {
-    // about 30 frames a second is plenty for something that turns a degree or two a second
-    if (t - last > 32) { frame(t); last = t; }
+    // the dust moves a few pixels a second: 20 frames a second are plenty
+    if (t - last > 48) { frame(t); last = t; }
     raf = visible ? requestAnimationFrame(loop) : 0;
   }
   function start() { if (still) { frame(0); return; } if (!raf) raf = requestAnimationFrame(loop); }
