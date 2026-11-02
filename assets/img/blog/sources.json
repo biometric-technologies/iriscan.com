@@ -196,5 +196,13 @@
   "source_organization": "National Inventors Hall of Fame",
   "source_country": "United States",
   "edit": "AI-edited landscape cover: corrected wall and facade perspective, mild zoom, Gothic Cambridge building retained on the right. Original portrait remains in the article."
+ },
+ {
+  "file": "john-daugman-cambridge",
+  "src": "https://www.cst.cam.ac.uk/sites/default/files/daugman-leading-image_0.jpg",
+  "source": "https://www.cst.cam.ac.uk/news/computer-scientist-whose-technology-helped-millions-prove-their-identity",
+  "source_organization": "University of Cambridge, Department of Computer Science and Technology",
+  "source_country": "United Kingdom",
+  "edit": "Original photograph, no AI edits. Cropped to the blog card by CSS only."
  }
 ]
