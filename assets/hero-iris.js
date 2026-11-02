@@ -28,7 +28,7 @@
   var seed;
   function rand() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
 
-  var dpr, W, H, cx, cy, R, rp, layer, flow, dust;
+  var dpr, W, H, cx, cy, R, rp, layer, flow, dust, fray;
   var BG = '#141416';                 // the page background
   var LIGHT = -2.3;                   // direction the light comes from (upper left), radians
 
@@ -186,12 +186,6 @@
         dot(g, pc[0] + d2 * Math.cos(t2), pc[1] + d2 * Math.sin(t2), 0.5, '#7d6440', 0.12 + 0.2 * rand());
       }
     }
-    // the edge frays: loose dots just outside the limbus, thinning out
-    for (i = 0; i < R * 22; i++) {
-      a = rand() * 6.2832; var o = Math.pow(rand(), 2.2) * 0.09;
-      q = at(R * (0.99 + o), a);
-      dot(g, q[0], q[1], 0.4 + rand() * 0.4, rand() < 0.5 ? '#8fb3d6' : '#a9b0b9', (0.35 - o * 3) * light(q[0], q[1]));
-    }
     // a dark ruff right at the pupil's edge
     var ruff = g.createRadialGradient(cx, cy, rp, cx, cy, rp * 1.25);
     ruff.addColorStop(0, 'rgba(12,16,14,0.75)'); ruff.addColorStop(1, 'rgba(12,16,14,0)');
@@ -231,6 +225,17 @@
                   v: 1.5 + rand() * 3.5, tw: 6 + rand() * 10, ph: rand() * 6.2832 });
     }
     dust.dx = ddx; dust.dy = ddy; dust.span = R * 5;
+    // the frayed edge: loose dots just outside the limbus, thinning out; each sways very slowly
+    // around its place (a pixel or two, over 10 to 30 seconds)
+    fray = [];
+    for (var fi2 = 0; fi2 < R * 22; fi2++) {
+      var fa = rand() * 6.2832, fo = Math.pow(rand(), 2.2) * 0.09, fr = R * (0.99 + fo);
+      var fx = cx + fr * Math.cos(fa), fy = cy + fr * Math.sin(fa);
+      fray.push({ x: fx, y: fy, ux: Math.cos(fa), uy: Math.sin(fa),
+                  r: 0.4 + rand() * 0.4, c: rand() < 0.5 ? '#8fb3d6' : '#a9b0b9',
+                  a: Math.max(0, (0.35 - fo * 3) * light(fx, fy)),
+                  amp: 0.6 + rand() * 1.6, per: 10 + rand() * 20, ph: rand() * 6.2832, ph2: rand() * 6.2832 });
+    }
     flow = [];
     var spokes = 180, perSpoke = 18;
     for (var sIdx = 0; sIdx < spokes; sIdx++) {
@@ -284,6 +289,14 @@
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.globalAlpha = 0.9;
     ctx.drawImage(layer, 0, 0);
+    // the frayed edge over it, swaying slowly: mostly in and out, a little sideways
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    for (i = 0; i < fray.length; i++) {
+      var e = fray[i], w = s * 6.2832 / e.per;
+      var radial = e.amp * Math.sin(w + e.ph), side = e.amp * 0.5 * Math.sin(w * 0.7 + e.ph2);
+      ctx.globalAlpha = e.a * 0.9; ctx.fillStyle = e.c;
+      ctx.beginPath(); ctx.arc(e.x + e.ux * radial - e.uy * side, e.y + e.uy * radial + e.ux * side, e.r, 0, 6.2832); ctx.fill();
+    }
     ctx.globalAlpha = 1;
   }
 
