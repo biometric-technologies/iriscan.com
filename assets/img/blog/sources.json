@@ -172,5 +172,13 @@
   "user": "jcgellidon",
   "id": "AlZX3aSW5Iw",
   "crop": "crop=focalpoint&fp-x=0.5&fp-y=0.42&fp-z=1.4"
+ },
+ {
+  "file": "eye-in-sunlight",
+  "src": "https://images.unsplash.com/photo-1530695440407-21fef47230b1",
+  "author": "Bacila Vlad",
+  "user": "bacila_vlad",
+  "id": "WTThc6UmwEI",
+  "crop": "crop=focalpoint&fp-x=0.5&fp-y=0.5&fp-z=1"
  }
 ]
