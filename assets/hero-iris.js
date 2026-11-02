@@ -28,7 +28,7 @@
   var seed;
   function rand() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
 
-  var dpr, W, H, cx, cy, R, rp, layer, flow;
+  var dpr, W, H, cx, cy, R, rp, layer, flow, dust;
   var BG = '#141416';                 // the page background
   var LIGHT = -2.3;                   // direction the light comes from (upper left), radians
 
@@ -90,7 +90,7 @@
     // crypts of Fuchs: irregular lozenge-shaped hollows, most of them just outside the collarette;
     // their outline is a circle bent by a few random harmonics, stretched along the radius
     var crypts = [], k;
-    for (k = 0; k < 14; k++) {
+    for (k = 0; k < 10; k++) {
       var near = rand() < 0.7;
       var ca = rand() * 6.2832;
       crypts.push({ a: ca, u: near ? collar(ca) + 0.04 + rand() * 0.12 : 0.55 + rand() * 0.3,
@@ -100,7 +100,7 @@
     }
     // contraction furrows: broken, wavy dark arcs near the edge
     var furrows = [];
-    for (k = 0; k < 6; k++) {
+    for (k = 0; k < 0; k++) {
       furrows.push({ u: 0.7 + rand() * 0.22, a0: rand() * 6.2832, len: 0.5 + rand() * 1.8, ph: rand() * 6.28 });
     }
     function feature(u, a) {
@@ -124,9 +124,9 @@
     for (i = 0; i < n; i++) {
       u = Math.sqrt(rand()); a = rand() * 6.2832; r = rp + u * (R - rp);
       fe = feature(u, a);
-      if (fe === 0 && rand() < 0.7) continue;
+      if (fe === 0 && rand() < 0.35) continue;
       q = at(r, a);
-      dot(g, q[0], q[1], 0.35 + rand() * 0.45, tint(u), (0.05 + 0.2 * rand()) * light(q[0], q[1]) * (fe === 2 ? 1.3 : 1));
+      dot(g, q[0], q[1], 0.35 + rand() * 0.45, tint(u), (0.05 + 0.2 * rand()) * light(q[0], q[1]) * (fe === 2 ? 1.1 : 1));
     }
     // fibres: wavy curves from the pupil outwards, crossing each other; every dot is nudged off
     // the curve and the steps vary, so no regular pattern appears
@@ -138,11 +138,11 @@
         u = (r - rp) / (R - rp);
         a = a0 + turn * Math.sin(u * Math.PI * 0.5) + wamp * Math.sin(u * 14 + wph);
         fe = feature(u, a);
-        if ((fe === 0 && rand() < 0.8) || rand() < 0.3) continue;
+        if ((fe === 0 && rand() < 0.45) || rand() < 0.3) continue;
         var inner = u < collar(a);
         q = at(r + (rand() - 0.5) * 1.2, a + (rand() - 0.5) * 0.0008);
         dot(g, q[0], q[1], 0.4 + rand() * 0.25, inner ? '#cfe5cc' : (u > 0.82 ? '#c4cad2' : '#cfe1f3'),
-            (0.09 + 0.34 * br) * (inner ? 0.85 : 1 - 0.3 * u) * light(q[0], q[1]) * (fe === 2 ? 1.4 : 1));
+            (0.09 + 0.34 * br) * (inner ? 0.85 : 1 - 0.3 * u) * light(q[0], q[1]) * (fe === 2 ? 1.15 : 1));
       }
     }
     // the collarette itself: a bright, ragged band along the jagged line
@@ -167,7 +167,7 @@
       u = Math.sqrt(rand()); a = rand() * 6.2832;
       if (feature(u, a) !== 0) continue;
       q = at(rp + u * (R - rp), a);
-      dot(g, q[0], q[1], 0.9, '#0a131c', 0.3);
+      dot(g, q[0], q[1], 0.9, '#0a131c', 0.1);
     }
     // radial furrows: thin dark streaks in the ciliary zone
     for (var d = 0; d < 34; d++) {
@@ -208,26 +208,6 @@
     var lim = g.createRadialGradient(cx, cy, R * 0.84, cx, cy, R * 1.01);
     lim.addColorStop(0, 'rgba(14,18,24,0)'); lim.addColorStop(0.75, 'rgba(14,18,24,0.6)'); lim.addColorStop(1, 'rgba(14,18,24,0)');
     g.fillStyle = lim; g.beginPath(); g.arc(cx, cy, R * 1.01, 0, 6.2832); g.fill();
-    // the cornea: a broad soft sheen on the lit side, and the faint reflection of a window
-    var hx = cx + Math.cos(LIGHT) * R * 0.42, hy = cy + Math.sin(LIGHT) * R * 0.42;
-    var hl = g.createRadialGradient(hx, hy, 0, hx, hy, R * 0.6);
-    hl.addColorStop(0, 'rgba(225,238,255,0.09)'); hl.addColorStop(1, 'rgba(225,238,255,0)');
-    g.fillStyle = hl; g.beginPath(); g.arc(hx, hy, R * 0.6, 0, 6.2832); g.fill();
-    g.save();
-    g.translate(cx + Math.cos(LIGHT) * R * 0.5, cy + Math.sin(LIGHT) * R * 0.5);
-    g.rotate(-0.35);
-    var ww = R * 0.26, wh = R * 0.19;
-    var wg = g.createLinearGradient(0, -wh / 2, 0, wh / 2);
-    wg.addColorStop(0, 'rgba(240,247,255,0.16)'); wg.addColorStop(1, 'rgba(240,247,255,0.04)');
-    g.fillStyle = wg; g.filter = 'blur(' + Math.max(1, R * 0.012) + 'px)';
-    g.beginPath();
-    if (g.roundRect) g.roundRect(-ww / 2, -wh / 2, ww, wh, R * 0.04); else g.rect(-ww / 2, -wh / 2, ww, wh);
-    g.fill();
-    g.filter = 'none';
-    g.restore();
-    // a thin rim of light along the lit edge of the limbus
-    g.strokeStyle = 'rgba(200,215,230,0.05)'; g.lineWidth = Math.max(1, R * 0.006);
-    g.beginPath(); g.arc(cx, cy, R * 0.985, LIGHT - 1.1, LIGHT + 1.1); g.stroke();
     // the pupil
     var pup = g.createRadialGradient(cx, cy, rp * 0.86, cx, cy, rp * 1.08);
     pup.addColorStop(0, '#05070a'); pup.addColorStop(1, 'rgba(5,7,10,0)');
@@ -238,6 +218,19 @@
   // the stream: dots on straight spokes from the centre; past the edge each one turns a little
   // off its spoke and drifts away, fading
   function buildFlow() {
+    // gold dust in two diagonal plumes through the iris, from the upper left to the lower right
+    dust = [];
+    var ddx = Math.cos(0.5), ddy = Math.sin(0.5);
+    for (var di = 0; di < 650; di++) {
+      var side = rand() < 0.5 ? -1 : 1;
+      var along = (rand() - 0.5) * R * 5;
+      var spread = (Math.pow(rand(), 1.8) * R * 1.1 + R * 0.6) * side * (rand() < 0.2 ? 0.45 : 1);
+      var flake = rand() < 0.05;
+      dust.push({ x: cx + ddx * along - ddy * spread * 0.55, y: cy + ddy * along + ddx * spread * 0.55,
+                  r: flake ? 1.3 + rand() * 1.3 : 0.35 + rand() * 0.75, a: flake ? 0.3 + rand() * 0.25 : 0.12 + rand() * 0.38,
+                  v: 1.5 + rand() * 3.5, tw: 6 + rand() * 10, ph: rand() * 6.2832 });
+    }
+    dust.dx = ddx; dust.dy = ddy; dust.span = R * 5;
     flow = [];
     var spokes = 180, perSpoke = 18;
     for (var sIdx = 0; sIdx < spokes; sIdx++) {
@@ -273,6 +266,16 @@
       ctx.globalAlpha = 0.55 * Math.pow(1 - life, 1.4);
       ctx.fillStyle = p.blue ? '#8fb3d6' : '#a9b0b9';
       ctx.beginPath(); ctx.arc(x, y, p.size, 0, 6.2832); ctx.fill();
+    }
+
+    // gold dust, drifting along its plumes, behind the iris too
+    ctx.fillStyle = '#d6b46a';
+    for (i = 0; i < dust.length; i++) {
+      var d = dust[i], m = (d.v * s) % dust.span;
+      var gx = d.x + dust.dx * m, gy = d.y + dust.dy * m;
+      if ((gx - cx) * dust.dx + (gy - cy) * dust.dy > dust.span / 2) { gx -= dust.dx * dust.span; gy -= dust.dy * dust.span; }
+      ctx.globalAlpha = d.a * (0.55 + 0.45 * Math.sin(s * 6.2832 / d.tw + d.ph));
+      ctx.beginPath(); ctx.arc(gx, gy, d.r, 0, 6.2832); ctx.fill();
     }
 
     // the iris in front: an opaque disc in the page colour, then the painted iris, muted
