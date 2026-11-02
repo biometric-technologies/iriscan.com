@@ -180,5 +180,13 @@
   "user": "bacila_vlad",
   "id": "WTThc6UmwEI",
   "crop": "crop=focalpoint&fp-x=0.5&fp-y=0.5&fp-z=1"
+ },
+ {
+  "file": "john-daugman-cover",
+  "embedded_jpeg": "john-daugman-cover.svg",
+  "source": "https://www.invent.org/inductees/john-g-daugman",
+  "source_organization": "National Inventors Hall of Fame",
+  "source_country": "United States",
+  "edit": "AI-expanded landscape background for the blog cover. The original portrait remains in the article."
  }
 ]
