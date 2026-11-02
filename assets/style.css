@@ -769,3 +769,6 @@ body.centered .prose .tbl{max-width:820px;margin-left:auto;margin-right:auto}
 .sol-steps.illustrated .step-ico{display:block;width:64px;height:64px;color:var(--accent);margin:0 0 .9rem}
 .sol-steps.illustrated b{display:block;margin-bottom:.3rem}
 @media(max-width:820px){.sol-steps.illustrated{grid-template-columns:1fr}}
+
+/* the last section before the footer: no full section gap, so the footer stays with the page */
+section.before-footer{padding-bottom:1.5rem}
