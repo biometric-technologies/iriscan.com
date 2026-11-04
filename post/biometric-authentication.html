@@ -14,7 +14,7 @@
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="../assets/style.css?v=20261105e">
+<link rel="stylesheet" href="../assets/style.css?v=20261105f">
 <link rel="preload" as="image" href="/assets/img/iriscan-particle-wave-background.webp" fetchpriority="high">
 <link rel="canonical" href="https://www.iriscan.com/post/biometric-authentication">
 <meta property="og:type" content="article">
@@ -98,7 +98,7 @@
 <figure><img src="../assets/img/biometrics-market-2025-analyst-estimates.jpg" alt="Global biometrics market size and fingerprint share in 2025 according to four market research firms" loading="lazy"><figcaption>Fingerprint still takes roughly a third of biometrics revenue; analysts differ on the rest.</figcaption></figure>
 
 <h2>Templates, not images</h2>
-<p>After enrollment, a biometric system mostly works with templates. A fingerprint template is a list of minutiae, an iris template is a bit string with a mask, a face template is an embedding. Templates are small and fast to compare, and they cannot be turned back into the original image. This way they are the safer thing to store and to exchange.</p>
+<p>After enrollment, a biometric system mostly works with templates. A fingerprint template is a list of minutiae, an iris template is a bit string with a mask, a face template is an embedding. Templates are small and fast to compare, and they do not contain the original image, which cannot practically be restored from them. This way they are the safer thing to store and to exchange.</p>
 <p>This raises the question that decides the long-term cost of the system: in which format are the templates stored?</p>
 
 <figure><img src="../assets/img/fingerprint-minutiae-cover.jpg" alt="Fingerprint with minutiae extracted by the Iriscan biometric converter" loading="lazy"><figcaption>A fingerprint template is a list of minutiae: ridge endings (red) and bifurcations (blue) from a NIST sample.</figcaption></figure>
@@ -127,11 +127,11 @@
 <aside class="cta">
 <h3>Stuck with a proprietary template format?</h3>
 <p>We migrate biometric databases to ISO and ANSI formats and build authentication on open components you can keep running without us. Try the converter on your own files first.</p>
-<p class="cta-kit">Buy a <a href="/iris-scanners">supported USB iris scanner</a> yourself and start the trial, or let us ship everything: the <a href="/pricing#starter">$590 starter kit</a> has a scanner, three months of the cloud and setup.</p>
+<p class="cta-kit">Buy a <a href="/iris-scanners">supported USB iris scanner</a> yourself and <a href="/get-started?interest=trial">request a 14-day trial</a>, or let us ship everything: the <a href="/pricing#starter">$590 starter kit</a> has a scanner, three months of the cloud and setup.</p>
 <p><a class="btn" href="/get-started">Talk to us</a> <a class="btn ghost" href="/biometric-data-interchange#demo">Try the converter</a></p>
 </aside>
 <div class="readnext"><h3>Read next</h3><ul>
-<li><a href="/post/iris-authentication-a-biometric-security-solution">Iris Authentication: A Biometric Security Solution</a></li>
+<li><a href="/post/iris-authentication-a-biometric-security-solution">Iris Authentication: How Accurate It Is and How to Tune It</a></li>
 <li><a href="/post/demystifying-biometric-security-what-is-iris-scanning">What is Iris Scanning?</a></li>
 <li><a href="/biometrics-identity-verification-system">Biometrics Identity Verification System</a></li>
 </ul></div>
@@ -164,6 +164,6 @@
 </footer>
 <div id="ckbar" hidden role="dialog" aria-label="Cookie consent"><span>Allow analytics cookies? <a href="/privacy#cookies">Privacy</a></span><button id="ckno">Decline</button><button id="ckyes">Accept</button></div>
 <script>(function(){var y=document.querySelectorAll('.yr');for(var i=0;i<y.length;i++)y[i].textContent=new Date().getFullYear();})();</script>
-<script src="/assets/currency.js?v=3" defer></script>
+<script src="/assets/currency.js?v=4" defer></script>
 <script src="/assets/consent.js" defer></script>
 </body></html>

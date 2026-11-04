@@ -14,7 +14,7 @@
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/style.css?v=20261105e">
+<link rel="stylesheet" href="/assets/style.css?v=20261105f">
 <link rel="preload" as="image" href="/assets/img/iriscan-particle-wave-background.webp" fetchpriority="high">
 <link rel="canonical" href="https://www.iriscan.com/mosip">
 <meta property="og:type" content="website">
@@ -94,7 +94,7 @@
 
 <h2>What MOSIP is, for people outside the ID world</h2>
 <p>Every country needs a register of its residents: who is who, with a unique number per person, so that passports, voting rolls, bank accounts, pensions and health insurance can all point to the same person. Building such a system from scratch used to mean a multi-year contract with one vendor, and a register the country could not change or even fully inspect afterwards.</p>
-<p>MOSIP, the Modular Open Source Identity Platform, is the open-source answer to that. It was started in 2018 at the International Institute of Information Technology Bangalore, is funded by philanthropic foundations rather than by vendors, and is recognised as a digital public good. A government takes the code for free, picks the pieces it needs, and has a local system integrator put them together. MOSIP reports 14 national rollouts and engagements with 32 countries, among them the Philippines, Morocco, Ethiopia, Sri Lanka, Uganda, Nigeria and Togo. Several of these registers now hold tens of millions of people each.</p>
+<p>MOSIP, the Modular Open Source Identity Platform, is the open-source answer to that. It was started in 2018 at the International Institute of Information Technology Bangalore, is funded by philanthropic foundations rather than by vendors, and is recognized as a digital public good. A government takes the code for free, picks the pieces it needs, and has a local system integrator put them together. MOSIP reports 14 national rollouts and engagements with 32 countries, among them the Philippines, Morocco, Ethiopia, Sri Lanka, Uganda, Nigeria and Togo. Several of these registers now hold tens of millions of people each.</p>
 <p>The platform is called "modular" because the parts that do the hard work are plugged in, not built in. Three of those parts are biometric, and they are what this page is about:</p>
 <div class="tbl"><table>
 <tr class="thead"><th>MOSIP term</th><th>What it means in plain words</th></tr>
@@ -117,7 +117,7 @@
 <h2>What a MOSIP country gets</h2>
 <div class="sol-cards">
 <div class="sol-card"><h3>Open source, inspectable</h3><p>The SDK is GPL-3.0 on <a href="https://github.com/biometric-technologies/biometric-sdk">GitHub</a>. Your team can read what runs in the register, build it themselves and keep it running without us.</p></div>
-<div class="sol-card"><h3>Your servers, your data</h3><p>ABIS and SDK run in the national data center. Templates and images are stored in ISO/IEC 19794 formats, so the register stays usable with any other MOSIP-compatible component.</p></div>
+<div class="sol-card"><h3>Your servers, your data</h3><p>ABIS and SDK run in the national data center. Images are stored in ISO/IEC 19794 formats, so templates can be re-created by any matcher and the register stays usable with any other MOSIP-compatible component.</p></div>
 <div class="sol-card"><h3>Iris where fingerprints struggle</h3><p>Worn fingerprints from manual work, dust and age are common in enrollment programs. Iris capture works for these people and for children, and a dual-iris camera takes both eyes in one look.</p></div>
 <div class="sol-card"><h3>Priced for small programs</h3><p>No per-seat license servers. A per-person licence for your own servers starts at $0.03 a year; see <a href="/pricing#cloud">pricing</a>. Integrators building closed-source products use the <a href="/commercial-license">commercial licence</a>.</p></div>
 </div>
@@ -137,7 +137,7 @@
 <div class="sol-card"><h3>Can we start with face only?</h3><p>Yes. The face SDK is the component already in production use with MOSIP. Iris can be added when the enrollment kits are ready.</p></div>
 <div class="sol-card"><h3>What about fingerprints?</h3><p>Our <a href="/biometric-data-interchange">converter</a> reads ISO/IEC 19794-2 and ANSI INCITS 378 fingerprint templates, so an existing fingerprint gallery can be kept alongside iris.</p></div>
 <div class="sol-card"><h3>Who supports it in five years?</h3><p>The code is open and documented, and the formats are ISO. Your team or any other vendor can take over; nothing in the register depends on a licence key.</p></div>
-<div class="sol-card"><h3>Is there a reference?</h3><p>Our face SDK is credited in MOSIP's documentation as the open-source face match component of the Inji reference integration. For iris, we publish our <a href="/post/open-source-iris-recognition-libraries">accuracy figures</a> on public datasets.</p></div>
+<div class="sol-card"><h3>Is there a reference?</h3><p>Our face SDK is credited in MOSIP's documentation as the open-source face match component of the Inji reference integration. For iris, the SDK includes the <a href="/post/open-source-iris-recognition-libraries">benchmark we use</a>, so you can measure accuracy on your own images.</p></div>
 </div>
 
 <h2>Next step</h2>
@@ -173,6 +173,6 @@
 <script src="/assets/fx.js" defer></script>
 <div id="ckbar" hidden role="dialog" aria-label="Cookie consent"><span>Allow analytics cookies? <a href="/privacy#cookies">Privacy</a></span><button id="ckno">Decline</button><button id="ckyes">Accept</button></div>
 <script>(function(){var y=document.querySelectorAll('.yr');for(var i=0;i<y.length;i++)y[i].textContent=new Date().getFullYear();})();</script>
-<script src="/assets/currency.js?v=3" defer></script>
+<script src="/assets/currency.js?v=4" defer></script>
 <script src="/assets/consent.js" defer></script>
 </body></html>

@@ -5,7 +5,7 @@
 <script>if(/\.html$/.test(location.pathname))history.replaceState(null,"",location.pathname.replace(/(index)?\.html$/,"")+location.search+location.hash)</script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Open-Source Iris Recognition SDK for Android and iOS | Iriscan</title>
+<title>Open-Source Iris Recognition SDK for Android, iOS and JVM | Iriscan</title>
 <meta name="description" content="Open-source iris recognition SDK for Android, iOS and JVM: segmentation, ISO/IEC 29794-6 quality, encoding and 1:1 or 1:N matching. Plus a cloud API with de-duplication.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,16 +14,16 @@
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/style.css?v=20261105e">
+<link rel="stylesheet" href="assets/style.css?v=20261105f">
 <link rel="canonical" href="https://www.iriscan.com/iris-recognition-sdk">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Iriscan">
-<meta property="og:title" content="Open-Source Iris Recognition SDK for Android and iOS | Iriscan">
+<meta property="og:title" content="Open-Source Iris Recognition SDK for Android, iOS and JVM | Iriscan">
 <meta property="og:description" content="Open-source iris recognition SDK for Android, iOS and JVM: segmentation, ISO/IEC 29794-6 quality, encoding and 1:1 or 1:N matching. Plus a cloud API with de-duplication.">
 <meta property="og:url" content="https://www.iriscan.com/iris-recognition-sdk">
 <meta property="og:image" content="https://www.iriscan.com/assets/img/blog/blue-grey-eye-closeup.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Iriscan Biometric SDK", "applicationCategory": "DeveloperApplication", "operatingSystem": "Android, iOS, JVM", "softwareVersion": "0.7.0", "license": "https://www.gnu.org/licenses/gpl-3.0.html", "url": "https://www.iriscan.com/iris-recognition-sdk", "downloadUrl": "https://github.com/biometric-technologies/biometric-sdk", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "publisher": {"@type": "Organization", "name": "Iriscan", "legalName": "Biometric Technologies OÜ", "url": "https://www.iriscan.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Iriscan Biometric SDK", "applicationCategory": "DeveloperApplication", "operatingSystem": "Android, iOS, JVM", "softwareVersion": "0.7.0", "license": "https://www.gnu.org/licenses/gpl-3.0.html", "url": "https://www.iriscan.com/iris-recognition-sdk", "downloadUrl": "https://github.com/biometric-technologies/biometric-sdk", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "Iriscan", "legalName": "Biometric Technologies OÜ", "url": "https://www.iriscan.com"}}</script>
 </head>
 <body class="centered">
 <header>
@@ -90,7 +90,7 @@
 
 <h2>Two ways to integrate</h2>
 <h3>Biometric SDK</h3>
-<p>A Kotlin Multiplatform library for Android, iOS and the JVM. Everything runs locally: no images leave the device unless you send them. It is open source under GPL-3.0 (a <a href="/commercial-license">commercial licence</a> is available for closed-source products) and published on Maven Central (<code>net.iriscan:biometric-sdk</code>) and CocoaPods (<code>BiometricSdk</code>). If GPL does not suit your product, <a href="/get-started">ask us</a> about other terms.</p>
+<p>A Kotlin Multiplatform library for Android, iOS and the JVM. Everything runs locally: no images leave the device unless you send them. It is open source under GPL-3.0 (a <a href="/commercial-license">commercial licence</a> is available for closed-source products) and published on Maven Central (<code>net.iriscan:biometric-sdk</code>) and CocoaPods (<code>BiometricSdk</code>).</p>
 <h3>Cloud Iris API</h3>
 <p>A REST service built on the same algorithm. You send eye images; it stores the templates in a separate gallery for your organization, refuses to enroll the same iris twice under different names, and searches the whole gallery in a fraction of a second. Each response includes per-eye image quality so you can ask for a retake on the spot. See the <a href="https://docs.iriscan.com">API documentation</a> and <a href="/pricing">pricing</a>.</p>
 
@@ -131,7 +131,7 @@ val best  = sdk.iris().matcher().identify(template, gallery)     // 1:N, null if
 <p>Results depend on the camera, lighting and the people you enroll. The SDK includes the benchmark we use, so you can run it on images from your own scanners and pick the threshold that fits your false match budget.</p>
 
 <h2>Supported USB iris scanners</h2>
-<p>The SDK works with near-infrared images from dedicated iris cameras. We supply and support <a href="/post/vista-ey2-dual-iris-and-face-camera">Vista EY2</a>, <a href="/post/vista-fa2-single-iris-face-camera">Vista FA2</a> and the <a href="/post/biosid-biometric-mobile-enrollment-and-verification-tablet-device">BIOSID tablet</a>, and can help you choose a device for field enrollment.</p>
+<p>The SDK works with near-infrared images from dedicated iris cameras. We test it with the <a href="/iris-scanners">IriTech IriShield MK 2120U and the Biomatiques EPI-1000</a>, single-eye USB scanners for a laptop or an Android tablet. For busy registration desks and field enrollment we also supply <a href="/post/vista-iris-cameras-compared">Vista dual-iris cameras</a> and the <a href="/post/biosid-biometric-mobile-enrollment-and-verification-tablet-device">BIOSID tablet</a>.</p>
 
 <h2>Questions</h2>
 <h3>How big is an iris template?</h3>
@@ -177,6 +177,6 @@ val best  = sdk.iris().matcher().identify(template, gallery)     // 1:N, null if
 </footer>
 <div id="ckbar" hidden role="dialog" aria-label="Cookie consent"><span>Allow analytics cookies? <a href="/privacy#cookies">Privacy</a></span><button id="ckno">Decline</button><button id="ckyes">Accept</button></div>
 <script>(function(){var y=document.querySelectorAll('.yr');for(var i=0;i<y.length;i++)y[i].textContent=new Date().getFullYear();})();</script>
-<script src="/assets/currency.js?v=3" defer></script>
+<script src="/assets/currency.js?v=4" defer></script>
 <script src="/assets/consent.js" defer></script>
 </body></html>

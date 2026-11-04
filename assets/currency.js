@@ -21,6 +21,7 @@
       acceptNode: function (n) {
         var p = n.parentNode;
         if (!p || /^(SCRIPT|STYLE|CODE|PRE|TEXTAREA)$/.test(p.nodeName)) return NodeFilter.FILTER_REJECT;
+        if (p.closest && p.closest('.proof-card, [data-nocur]')) return NodeFilter.FILTER_REJECT;
         return /\$\d/.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
       }
     });

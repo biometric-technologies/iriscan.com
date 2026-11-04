@@ -14,7 +14,7 @@
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/style.css?v=20261105e">
+<link rel="stylesheet" href="/assets/style.css?v=20261105f">
 <link rel="preload" as="image" href="/assets/img/iriscan-particle-wave-background.webp" fetchpriority="high">
 <link rel="canonical" href="https://www.iriscan.com/pricing">
 <meta property="og:type" content="website">
@@ -22,7 +22,7 @@
 <meta property="og:title" content="Iris Recognition API and USB Iris Scanner Pricing | Iriscan">
 <meta property="og:description" content="Iris recognition pricing in US dollars: the cloud from $99 a month for up to 25,000 people with a 14-day trial, then per person in your register, a $590 starter kit with a scanner and a $2,500 pilot.">
 <meta property="og:url" content="https://www.iriscan.com/pricing">
-<meta property="og:image" content="https://www.iriscan.com/assets/img/biometric-credit-bureau-flow.jpg?v=20">
+<meta property="og:image" content="https://www.iriscan.com/assets/img/iriscan-home-hero-biometric-network.jpg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 <body data-cur>
@@ -97,10 +97,10 @@
 
 <div class="grid g3 plans">
 <div class="card price-card"><div class="plan-name">Cloud</div><div class="price">from $99/mo</div>
-<ul class="tiers"><li><b>People in the register</b>Up to 25,000 for $99, then per person per month:
+<ul class="tiers"><li><b>People in the register</b>$99 a month covers up to 25,000. Above that, every person counts, per month:
 <span>first 50,000 &middot; $0.004</span><span>next 200,000 &middot; $0.002</span><span>next 750,000 &middot; $0.001</span><span>above 1,000,000 &middot; $0.0005</span></li>
 <li><b>Checks and operators</b>Checks up to twice the register every month, unlimited operators</li><li><b>Trial</b>14 days free, no card</li></ul>
-<a class="btn" href="/get-started?interest=trial">Start a trial</a></div>
+<a class="btn" href="/get-started?interest=trial">Request a 14-day trial</a></div>
 <div class="card price-card"><div class="plan-name">Pilot</div><div class="price">$2,500</div>
 <ul><li><b>Term</b>Six months</li><li><b>Register</b>Up to 50,000 people</li><li><b>Includes</b>Four scanners, setup and staff training</li><li><b>Good for</b>A program or branch network that wants proof on its own data</li></ul>
 <a class="btn" href="/get-started?interest=pilot">Plan a pilot</a></div>
@@ -120,7 +120,7 @@
 <div class="calc-title">What do duplicates cost you a month?</div>
 <div class="calc-row calc-grid"><span><label for="fr-n"><small>People in your register</small></label><input type="number" id="fr-n" value="5000" min="0" step="100" inputmode="numeric"></span><span><label for="fr-l"><small>Average amount per person at risk, $ (a loan, a claim, a payout)</small></label><input type="number" id="fr-l" value="300" min="0" step="50" inputmode="numeric"></span><span><label for="fr-p"><small>Share per year that goes to someone already in your register under another name, %</small></label><input type="number" id="fr-p" value="1" min="0" max="100" step="0.5" inputmode="decimal"></span></div>
 <output id="fr-out" for="fr-n fr-l fr-p"></output>
-<p class="price-note">The 1% is your figure to replace; a lender, an insurer or a hospital knows it better than any vendor. For scale, in a field trial in Malawi, fingerprinting borrowers at loan time raised repayment among the riskiest group from 67% to 92% (<a href="https://www.povertyactionlab.org/evaluation/borrower-responses-fingerprinting-loan-enforcement-malawi" rel="noopener">J-PAL</a>). Our plans are priced so that stopping one duplicate loan a month pays for the year.</p>
+<p class="price-note">The 1% is your figure to replace; a lender, an insurer or a hospital knows it better than any vendor. For scale, in a field trial in Malawi, fingerprinting borrowers at loan time raised repayment among the riskiest group from 67% to 92% (<a href="https://www.povertyactionlab.org/evaluation/borrower-responses-fingerprinting-loan-enforcement-malawi" rel="noopener">J-PAL</a>). Our plans are priced so that stopping one duplicate loan a month more than pays for the plan.</p>
 </div>
 <div class="sol-card proof-card"><p class="lbl">What others saved with biometric checks</p><ul class="proof">
 <li><b>67% &rarr; 92%</b> repayment among the riskiest borrowers in Malawi once they were fingerprinted, in a randomized trial (<a href="https://www.povertyactionlab.org/evaluation/borrower-responses-fingerprinting-loan-enforcement-malawi" rel="noopener">J-PAL</a>)</li>
@@ -212,7 +212,7 @@
 <script src="/assets/fx.js" defer></script>
 <div id="ckbar" hidden role="dialog" aria-label="Cookie consent"><span>Allow analytics cookies? <a href="/privacy#cookies">Privacy</a></span><button id="ckno">Decline</button><button id="ckyes">Accept</button></div>
 <script>(function(){var y=document.querySelectorAll('.yr');for(var i=0;i<y.length;i++)y[i].textContent=new Date().getFullYear();})();</script>
-<script src="/assets/currency.js?v=3" defer></script>
+<script src="/assets/currency.js?v=4" defer></script>
 <script src="/assets/consent.js" defer></script>
 <script>(function(){var i=document.getElementById('calc-n'),o=document.getElementById('calc-out');if(!i||!o)return;
 var T=[[50000,0.004],[200000,0.002],[750000,0.001],[Infinity,0.0005]];

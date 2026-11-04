@@ -14,7 +14,7 @@
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="../assets/style.css?v=20261105e">
+<link rel="stylesheet" href="../assets/style.css?v=20261105f">
 <link rel="preload" as="image" href="/assets/img/iriscan-particle-wave-background.webp" fetchpriority="high">
 <link rel="canonical" href="https://www.iriscan.com/post/demystifying-biometric-security-what-is-iris-scanning">
 <meta property="og:type" content="article">
@@ -126,11 +126,11 @@
 <p>With a cooperative person and a decent scanner, it takes two to five seconds per eye, including positioning. Dual-iris cameras capture both eyes at once. Matching is fast: comparing iris codes is bit counting, and a single CPU core gets through about a million comparisons per second.</p>
 
 <h2>What hardware is needed?</h2>
-<p>For enrollment and verification at a desk or at a field station, a USB scanner costing from under $110 to about $190 is enough. Monocular handheld units such as Iritech IriShield plug into a laptop, a tablet or an Android phone. Dual-eye and iris-plus-face cameras, such as <a href="/post/vista-ey2-dual-iris-and-face-camera">Vista EY2</a>, cost more and work faster. Rugged tablets like <a href="/post/biosid-biometric-mobile-enrollment-and-verification-tablet-device">BIOSID</a> combine biometric capture with card reading in the field.</p>
+<p>For enrollment and verification at a desk or at a field station, a USB scanner costing from about $50 to about $190 is enough. Monocular handheld units such as Iritech IriShield plug into a laptop, a tablet or an Android phone. Dual-eye and iris-plus-face cameras, such as <a href="/post/vista-ey2-dual-iris-and-face-camera">Vista EY2</a>, cost more and work faster. Rugged tablets like <a href="/post/biosid-biometric-mobile-enrollment-and-verification-tablet-device">BIOSID</a> combine biometric capture with card reading in the field.</p>
 <p>Standard phone cameras have no infrared illumination and do not resolve the iris well enough, so mobile apps use face recognition instead. Our <a href="https://docs.iriscan.com/sdk">Biometric SDK</a> covers both: face on the phone, iris with a connected scanner.</p>
 
 <h2>What gets stored?</h2>
-<p>A well-designed system stores iris codes, not photos, and keeps them apart from names and other personal data. An iris code cannot be turned back into an image of the eye. Some programs still keep the original images, to be able to re-process them with a better algorithm later. This is a decision to take deliberately, with encryption and a defined retention period.</p>
+<p>A well-designed system stores iris codes, not photos, and keeps them apart from names and other personal data. An iris code does not contain the image of the eye, and the original photo cannot practically be restored from it. Some programs still keep the original images, to be able to re-process them with a better algorithm later. This is a decision to take deliberately, with encryption and a defined retention period.</p>
 <p>In addition, use standard formats (ISO/IEC 19794-6 or 39794-6) for everything you keep. Templates in a vendor's own format tie the database to this vendor's matcher.</p>
 
 <h2>Where is it used already?</h2>
@@ -141,11 +141,11 @@
 <aside class="cta">
 <h3>Planning an iris deployment?</h3>
 <p>We help to choose scanners, set up enrollment stations with the <a href="https://docs.iriscan.com/edge">Edge service</a>, which works offline, and connect them to your database or ours. The best start is a small pilot with real numbers.</p>
-<p class="cta-kit">Buy a <a href="/iris-scanners">supported USB iris scanner</a> yourself and start the trial, or let us ship everything: the <a href="/pricing#starter">$590 starter kit</a> has a scanner, three months of the cloud and setup.</p>
-<p><a class="btn" href="/get-started?interest=pilot">Plan a pilot</a> <a class="btn ghost" href="/post/iriscan-becomes-the-official-reseller-of-cardlogix">See devices</a></p>
+<p class="cta-kit">Buy a <a href="/iris-scanners">supported USB iris scanner</a> yourself and <a href="/get-started?interest=trial">request a 14-day trial</a>, or let us ship everything: the <a href="/pricing#starter">$590 starter kit</a> has a scanner, three months of the cloud and setup.</p>
+<p><a class="btn" href="/get-started?interest=pilot">Plan a pilot</a> <a class="btn ghost" href="/iris-scanners">See devices</a></p>
 </aside>
 <div class="readnext"><h3>Read next</h3><ul>
-<li><a href="/post/enhancing-security-the-advantages-of-biometric-verification">The Advantages of Biometric Verification</a></li>
+<li><a href="/post/enhancing-security-the-advantages-of-biometric-verification">Biometric Verification Against Identity Fraud: A Guide for Lenders</a></li>
 <li><a href="/post/how-does-iris-recognition-work">How Does Iris Recognition Work</a></li>
 <li><a href="/iris-recognition-software">Iris Recognition Software</a></li>
 </ul></div>
@@ -178,6 +178,6 @@
 </footer>
 <div id="ckbar" hidden role="dialog" aria-label="Cookie consent"><span>Allow analytics cookies? <a href="/privacy#cookies">Privacy</a></span><button id="ckno">Decline</button><button id="ckyes">Accept</button></div>
 <script>(function(){var y=document.querySelectorAll('.yr');for(var i=0;i<y.length;i++)y[i].textContent=new Date().getFullYear();})();</script>
-<script src="/assets/currency.js?v=3" defer></script>
+<script src="/assets/currency.js?v=4" defer></script>
 <script src="/assets/consent.js" defer></script>
 </body></html>
