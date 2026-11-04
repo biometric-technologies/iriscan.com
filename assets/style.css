@@ -780,7 +780,8 @@ section.before-footer{padding-bottom:1.5rem}
 @media(max-width:700px){.manifesto-band p.lead-big{font-size:1.12rem}}
 
 /* fintech: photo beside "In plain words", borrower strip (2026-11-05) */
-.pw-split{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:2.6rem;align-items:start}
+.pw-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,42%);gap:2.4rem;align-items:start}
+.pw-photo{max-width:430px;justify-self:end;width:100%}
 .pw-split>div>h2:first-child{margin-top:0}
 .pw-photo{margin:3.2rem 0 0}
 .pw-photo img{display:block;width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;border-radius:14px;filter:saturate(.85) brightness(.92)}
@@ -789,4 +790,6 @@ section.before-footer{padding-bottom:1.5rem}
 .photo-strip img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:14px;filter:saturate(.85) brightness(.92)}
 .photo-strip figcaption{margin-top:1.1rem;font-family:Poppins,sans-serif;font-weight:300;color:#fff;font-size:clamp(1.3rem,2.4vw,1.8rem);line-height:1.25}
 .photo-strip figcaption span{display:block;margin-top:.45rem;font-family:inherit;font-size:.75rem;font-weight:400;color:var(--muted,#8a8a93);letter-spacing:.01em}
-@media(max-width:860px){.pw-split{grid-template-columns:1fr;gap:1.4rem}.pw-photo{margin:0;max-width:340px}.photo-strip .ps{gap:.45rem}}
+@media(max-width:900px){.pw-split{grid-template-columns:1fr;gap:1.4rem}.pw-photo{margin:0 auto;max-width:430px;justify-self:center}.photo-strip .ps{gap:.45rem}}
+.pw-split .pw-flow{grid-template-columns:1fr;gap:2.4rem}
+.pw-split .pw-flow li:not(:last-child)::after{right:auto;left:50%;top:auto;bottom:-1.6rem;transform:translateX(-50%) rotate(135deg)}
