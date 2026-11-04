@@ -793,3 +793,4 @@ section.before-footer{padding-bottom:1.5rem}
 @media(max-width:900px){.pw-split{grid-template-columns:1fr;gap:1.4rem}.pw-photo{margin:0 auto;max-width:430px;justify-self:center}.photo-strip .ps{gap:.45rem}}
 .pw-split .pw-flow{grid-template-columns:1fr;gap:2.4rem}
 .pw-split .pw-flow li:not(:last-child)::after{right:auto;left:50%;top:auto;bottom:-1.6rem;transform:translateX(-50%) rotate(135deg)}
+@media(min-width:901px){.pw-split{align-items:stretch}.pw-photo{display:flex}.pw-photo img{height:100%;aspect-ratio:auto;object-fit:cover;object-position:62% 30%}}
