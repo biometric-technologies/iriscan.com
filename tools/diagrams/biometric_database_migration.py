@@ -8,10 +8,7 @@ ROOT = os.path.join(HERE, '..', '..')
 W, H, BG = 2000, 1125, '#141416'
 SALMON, GREEN, MUTED = '#f2a197', '#8fe0b0', '#c9c9cc'
 
-# Iriscan mark from the site header
-brand = re.search(r'<svg class="brand-icon" viewBox="([^"]+)"[^>]*>(.*?)</svg>',
-                  open(os.path.join(ROOT, 'index.html')).read(), re.S)
-BRAND_VB, BRAND_BODY = brand.group(1), brand.group(2)
+
 
 out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
        '<title>What moves to the new system and what does not: images and standard fingerprint templates move, '
@@ -35,12 +32,48 @@ def eye(cx, cy, k=1):
             f'<circle cx="{cx}" cy="{cy}" r="{12*k}" {S}/><circle cx="{cx}" cy="{cy}" r="{4*k}" fill="#fff"/>')
 
 
+def _arc(cx, cy, rx, ry, a0, a1, n=24):
+    import math
+    pts = [(cx + rx * math.cos(math.radians(a0 + (a1 - a0) * i / n)),
+            cy - ry * math.sin(math.radians(a0 + (a1 - a0) * i / n))) for i in range(n + 1)]
+    return 'M' + ' L'.join(f'{x:.1f} {y:.1f}' for x, y in pts), pts
+
+
 def minutiae(cx, cy):
-    # ridge arcs with two ridge endings and a bifurcation marked
-    arcs = ''.join(f'<path d="M{cx-r} {cy+12} A{r} {r*1.15} 0 0 1 {cx+r} {cy+12}" {S.replace("5","3.5",1)}/>' for r in (10, 20, 30, 40))
-    pts = [(cx - 20, cy - 9), (cx + 28, cy - 18), (cx + 8, cy - 33)]
-    marks = ''.join(f'<circle cx="{x}" cy="{y}" r="6" fill="{BG}" stroke="#5cc8ff" stroke-width="3"/>' for x, y in pts)
-    return arcs + marks
+    """A fingerprint (whorl of broken ridges) with three minutiae marked:
+    ridge endings and a bifurcation, each with its direction."""
+    import math
+    cy += 4
+    st = 'fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round"'
+    # (rx, segments as angle ranges in degrees, counterclockwise from 3 o'clock)
+    rings = [(5, [(20, 250)]),
+             (11, [(-40, 120), (150, 300)]),
+             (17, [(-60, 70), (95, 235), (255, 320)]),
+             (23, [(-35, 150), (170, 290)]),
+             (29, [(-20, 60), (80, 200), (215, 260)]),
+             (35, [(5, 175)])]
+    paths, ends = [], []
+    for rx, segs in rings:
+        for a0, a1 in segs:
+            d, pts = _arc(cx, cy, rx, rx * 1.22, a0, a1)
+            paths.append(f'<path d="{d}" {st}/>')
+            ends.append((pts[0], pts[1]))
+    # bifurcation: a short branch leaving ring 23 at 60 degrees
+    d, pts = _arc(cx, cy, 23, 23 * 1.22, 60, 60)
+    bx, by = pts[0]
+    paths.append(f'<path d="M{bx:.1f} {by:.1f} L{bx+7:.1f} {by-9:.1f}" {st}/>')
+    marks = []
+    def mark(x, y, ang):
+        tx, ty = x + 11 * math.cos(math.radians(ang)), y - 11 * math.sin(math.radians(ang))
+        marks.append(f'<path d="M{x:.1f} {y:.1f} L{tx:.1f} {ty:.1f}" stroke="#5cc8ff" stroke-width="3" stroke-linecap="round"/>'
+                     f'<circle cx="{x:.1f}" cy="{y:.1f}" r="5" fill="#5cc8ff"/>')
+    (x, y), _ = ends[3]          # ridge ending on ring 17
+    mark(x, y, -30)
+    (x, y), _ = ends[8]          # ridge ending on ring 29
+    mark(x, y, 160)
+    mark(bx, by, 50)             # bifurcation
+    clip = f'<clipPath id="fp{cx:.0f}{cy:.0f}"><ellipse cx="{cx}" cy="{cy}" rx="36" ry="44"/></clipPath>'
+    return f'<defs>{clip}</defs><g clip-path="url(#fp{cx:.0f}{cy:.0f})">' + ''.join(paths) + '</g>' + ''.join(marks)
 
 
 def key(cx, cy):
@@ -83,10 +116,13 @@ def papers(cx, cy):
         f'<path d="M{cx-4} {cy-2} H{cx+30} M{cx-4} {cy+10} H{cx+30} M{cx-4} {cy+22} H{cx+20}" {S.replace("5","3.5",1)}/>'
 
 
-def cloud(cx, cy):
-    c = (f'<path d="M{cx-70} {cy+40} C{cx-105} {cy+40} {cx-105} {cy-10} {cx-70} {cy-12} C{cx-66} {cy-58} {cx-10} {cy-70} {cx+15} {cy-36} '
-         f'C{cx+40} {cy-58} {cx+80} {cy-40} {cx+76} {cy-8} C{cx+108} {cy-6} {cx+108} {cy+40} {cx+76} {cy+40} Z" fill="#fff"/>')
-    return c + f'<svg x="{cx-48}" y="{cy-58}" width="86" height="86" viewBox="{BRAND_VB}">{BRAND_BODY}</svg>'
+def cloud(x, y, w=150):
+    """The cloud of the site's step icons (assets/img/steps/step-cloud.svg)."""
+    src = open(os.path.join(ROOT, 'assets', 'img', 'steps', 'step-cloud.svg')).read()
+    vb = re.search(r'viewBox="([^"]+)"', src).group(1)
+    body = src[src.index('>') + 1:src.rindex('</svg>')]
+    _, _, vw, vh = map(float, vb.split())
+    return f'<svg x="{x}" y="{y}" width="{w}" height="{w*vh/vw:.1f}" viewBox="{vb}">{body}</svg>'
 
 
 def panel(x, title, sub, icon, tx=175):
@@ -108,7 +144,7 @@ def row(x, cy, icon, title, sub=None, stroke='#66666b', subfill=MUTED):
 
 L, Rx, YS = 113, 1300, [452, 592, 732, 872]
 panel(L, 'Old vendor', 'closed system', papers(L + 90, 270))
-panel(Rx, 'New system', 'open standards', f'<g transform="translate({Rx + 130} 280) scale(.8)">' + cloud(0, 0) + '</g>', tx=255)
+panel(Rx, 'New system', 'open standards', cloud(Rx + 52, 229), tx=255)
 lx, rx = L + 38, Rx + 38
 row(lx, YS[0], eye(lx + 60, YS[0]), 'Raw images')
 row(lx, YS[1], minutiae(lx + 60, YS[1]), 'Fingerprint templates', 'standard minutiae (ISO, ANSI)')
