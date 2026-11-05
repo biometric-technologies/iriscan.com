@@ -14,7 +14,7 @@
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/style.css?v=20261105f">
+<link rel="stylesheet" href="assets/style.css?v=20261105g">
 <link rel="canonical" href="https://www.iriscan.com/iris-recognition-sdk">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Iriscan">
@@ -30,8 +30,8 @@
   <div class="wrap nav">
     <a class="brand" href="/"><svg class="brand-icon" viewBox="37.65 43.294 511.585 511.598" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="293.44" cy="299.1" r="136" fill="#fff"/><path d="M536.34 219.06c-21.16 64.09-66.99 116.98-126.25 147.41-1.93-39.3-12.98-78.7-33.99-115.1-21.01-36.38-49.62-65.68-82.65-86.98-56-36.11-124.74-49.37-190.87-35.61C181.54 40.09 314.45 15.9 421.32 77.6c24.26 14 45.35 31.37 63.03 51.2 23.61 26.48 41.15 57.31 51.99 90.26z" fill="#5cc8ff"/><path d="M176.78 366.45c-3.29 66.55 19.62 132.7 64.57 183.09-25.98-5.39-51.55-14.96-75.79-28.96C58.7 458.9 13.21 331.71 50.51 218.98c5.39-16.31 12.52-32.31 21.45-47.76 8.92-15.46 19.2-29.62 30.62-42.44 66.13-13.75 134.87-.5 190.87 35.61-33.06 21.3-61.66 50.57-82.67 86.98-21.02 36.4-32.07 75.81-34 115.08z" fill="#1c77c3"/><path d="M514.93 426.97c-37.9 65.68-100.54 108.15-169.36 122.51-33.97 7.09-69.46 7.32-104.22.06-44.95-50.39-67.86-116.54-64.57-183.09 34.99 17.97 74.64 28.1 116.66 28.1s81.67-10.13 116.64-28.08c59.27-30.43 105.1-83.32 126.25-147.41 22 66.76 16.51 142.25-21.4 207.91z" fill="#0a328f"/></svg><span>IRISCAN</span></a>
     <input type="checkbox" id="navtoggle">
-    <label class="burger" for="navtoggle">&#9776;</label>
-    <nav class="menu">
+    <label class="burger" for="navtoggle" role="button" tabindex="0" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">&#9776;</label>
+    <nav class="menu" id="site-menu" aria-label="Main">
       <div class="has-sub">
         <a href="/solutions/fintech">Solutions</a>
         <div class="sub">
@@ -84,7 +84,7 @@
 <section class="hero"><div class="wrap">
 <h1>Open-source iris recognition SDK for Android, iOS and JVM</h1>
 <p class="lead" style="max-width:46rem">Add iris enrollment, verification and 1:N identification to your app or back end. Run our open-source SDK on the device or your own server, or let the cloud API keep the gallery and catch duplicate enrollments for you.</p>
-<p style="margin-top:1.4rem"><a class="btn" href="https://github.com/biometric-technologies/biometric-sdk">SDK on GitHub</a> &nbsp; <a class="btn" href="/get-started">Talk to us about the API</a></p>
+<p style="margin-top:1.4rem"><a class="btn" href="https://github.com/biometric-technologies/biometric-sdk">SDK on GitHub</a> &nbsp; <a class="btn" href="/get-started?interest=sdk">Talk to us about the API</a></p>
 </div></section>
 <section><div class="wrap prose">
 
@@ -136,8 +136,8 @@ val best  = sdk.iris().matcher().identify(template, gallery)     // 1:N, null if
 <h2>Questions</h2>
 <h3>How big is an iris template?</h3>
 <p>1,032 bytes per eye: an 8-byte header, a 4,096-bit iris code and a 4,096-bit mask of valid bits. A register of a million people with both eyes enrolled fits in about 2 GB of memory.</p>
-<h3>Can I store templates in a standard format?</h3>
-<p>Yes. The SDK reads and writes ISO/IEC 19794-6 iris image records, so you can keep the images in a standard container and re-create templates when the algorithm improves.</p>
+<h3>Can I export iris images in a standard format?</h3>
+<p>Yes. The SDK reads and writes ISO/IEC 19794-6 iris image records, so you can keep the images in a standard container and compute new templates from them when the algorithm improves, or with another vendor&rsquo;s matcher. The iris template itself (iris code and mask) is in our own documented format; no standard template format for iris codes is shared across vendors.</p>
 <h3>Does it need a network connection?</h3>
 <p>No. Enrollment, quality checks and matching run on the device or your server. The <a href="/iris-deduplication">cloud de-duplication service</a> is optional.</p>
 
@@ -178,5 +178,6 @@ val best  = sdk.iris().matcher().identify(template, gallery)     // 1:N, null if
 <div id="ckbar" hidden role="dialog" aria-label="Cookie consent"><span>Allow analytics cookies? <a href="/privacy#cookies">Privacy</a></span><button id="ckno">Decline</button><button id="ckyes">Accept</button></div>
 <script>(function(){var y=document.querySelectorAll('.yr');for(var i=0;i<y.length;i++)y[i].textContent=new Date().getFullYear();})();</script>
 <script src="/assets/currency.js?v=4" defer></script>
+<script src="/assets/nav.js" defer></script>
 <script src="/assets/consent.js" defer></script>
 </body></html>

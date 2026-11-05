@@ -14,7 +14,7 @@
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="../assets/style.css?v=20261105f">
+<link rel="stylesheet" href="../assets/style.css?v=20261105g">
 <link rel="preload" as="image" href="/assets/img/iriscan-particle-wave-background.webp" fetchpriority="high">
 <link rel="canonical" href="https://www.iriscan.com/post/patient-identification-duplicate-medical-records-biometrics">
 <meta property="og:type" content="article">
@@ -31,8 +31,8 @@
   <div class="wrap nav">
     <a class="brand" href="/"><svg class="brand-icon" viewBox="37.65 43.294 511.585 511.598" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="293.44" cy="299.1" r="136" fill="#fff"/><path d="M536.34 219.06c-21.16 64.09-66.99 116.98-126.25 147.41-1.93-39.3-12.98-78.7-33.99-115.1-21.01-36.38-49.62-65.68-82.65-86.98-56-36.11-124.74-49.37-190.87-35.61C181.54 40.09 314.45 15.9 421.32 77.6c24.26 14 45.35 31.37 63.03 51.2 23.61 26.48 41.15 57.31 51.99 90.26z" fill="#5cc8ff"/><path d="M176.78 366.45c-3.29 66.55 19.62 132.7 64.57 183.09-25.98-5.39-51.55-14.96-75.79-28.96C58.7 458.9 13.21 331.71 50.51 218.98c5.39-16.31 12.52-32.31 21.45-47.76 8.92-15.46 19.2-29.62 30.62-42.44 66.13-13.75 134.87-.5 190.87 35.61-33.06 21.3-61.66 50.57-82.67 86.98-21.02 36.4-32.07 75.81-34 115.08z" fill="#1c77c3"/><path d="M514.93 426.97c-37.9 65.68-100.54 108.15-169.36 122.51-33.97 7.09-69.46 7.32-104.22.06-44.95-50.39-67.86-116.54-64.57-183.09 34.99 17.97 74.64 28.1 116.66 28.1s81.67-10.13 116.64-28.08c59.27-30.43 105.1-83.32 126.25-147.41 22 66.76 16.51 142.25-21.4 207.91z" fill="#0a328f"/></svg><span>IRISCAN</span></a>
     <input type="checkbox" id="navtoggle">
-    <label class="burger" for="navtoggle">&#9776;</label>
-    <nav class="menu">
+    <label class="burger" for="navtoggle" role="button" tabindex="0" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">&#9776;</label>
+    <nav class="menu" id="site-menu" aria-label="Main">
       <div class="has-sub">
         <a href="/solutions/fintech">Solutions</a>
         <div class="sub">
@@ -102,7 +102,7 @@
 <p>A 2018 Black Book survey of 1,392 health technology managers found that respondents reported about 18% duplicate records in their organizations before they introduced patient matching tools, and respondents attributed a third of denied claims to inaccurate patient identification or information. Consider now a hospital where many patients have the same few surnames, where a date of birth is often recorded as the 1st of January of an estimated year, and where a national ID number is not always available. The share of collisions is likely higher.</p>
 <p>The safety side has been known for a long time. In 2007 the WHO Collaborating Centre for Patient Safety Solutions, run by The Joint Commission, included patient identification in its nine patient safety solutions, noting that failures to identify patients correctly lead to medication, transfusion and testing errors, wrong-person procedures and even babies discharged to the wrong families.</p>
 
-<figure><img src="../assets/img/patient-identification-flow.webp?v=6" alt="Name search returns three records, iris search returns one" loading="lazy"><figcaption>One patient, one record: the record is found by the person, not by a name or a card.</figcaption></figure>
+<figure><img src="../assets/img/patient-identification-flow.webp?v=6" alt="Name search returns three records, iris search returns one" loading="lazy"><figcaption>The record is found by the person, not by a name or a card. Older duplicate files still have to be linked and merged by staff once.</figcaption></figure>
 
 <h2>Insurance at national scale: what India&rsquo;s PM-JAY shows</h2>
 <p>India's Ayushman Bharat PM-JAY covers about 550 million people with up to about $5,300 (Rs 5 lakh) per family per year for hospital treatment. Beneficiaries are verified with Aadhaar e-KYC when the card is issued and authenticated again when they receive treatment. By March 2025, according to the government's reply to the Rajya Sabha, states had rejected about 356,000 claims worth about $76 million (Rs 643 crore) for fraud. By May 2026, according to a reply to the Lok Sabha, 2,359 hospitals had been de-empanelled and 1,200 suspended. Among the patterns the scheme's systems flag are ghost billing and beneficiary impersonation.</p>
@@ -123,7 +123,7 @@
 <p>Biometrics identifies the person. It does not correct the record that is already wrong: merging existing duplicates still needs clinical review. It cannot be used for every patient, so emergency admissions need an override procedure. And it adds a new kind of sensitive data to the hospital. Templates should be stored apart from medical records, linked through a pseudonymous identifier, encrypted and covered by the hospital's data protection policy. Enrollment of children needs particular care and clear consent rules.</p>
 
 <h2>Where to start</h2>
-<p>The cheapest first step is to measure the problem. Enroll returning patients at the registration desks of one facility for a few weeks, and count how many of them already have more than one record. This number is a stronger argument for management than any presentation, and it gives the baseline for a wider rollout.</p>
+<p>The cheapest first step is to measure the problem. Enroll returning patients at the registration desks of one facility for a few weeks, link each one to the existing files found by name and documents, and count how many of them turn out to have more than one record. This number is a stronger argument for management than any presentation, and it gives the baseline for a wider rollout.</p>
 
 <p class="sources">Sources: <a href="https://qualitysafety.bmj.com/content/22/3/219">McCoy et al., Matching identifiers in electronic health records: implications for duplicate records and patient safety, BMJ Quality &amp; Safety</a>; <a href="https://www.healthcarefinancenews.com/news/patient-matching-hospitals-can-save-millions-improving-it">Healthcare Finance News, Black Book patient matching survey, 2018</a>; <a href="https://www.fiercehealthcare.com/healthcare/press-release-who-collaborating-centre-for-patient-safety-releases-nine-life-saving">WHO Collaborating Centre for Patient Safety Solutions, nine patient safety solutions</a>; <a href="https://www.theweek.in/wire-updates/national/2025/03/11/del42-rsq-health-ayushman-bharat.html">PTI, 3.56 lakh claims worth Rs 643 cr rejected for frauds under Ayushman Bharat scheme, 2025</a>; <a href="https://www.outlookmoney.com/personal-finance/ayushman-bharat-yojana-2359-hospitals-de-empanelled-1200-suspended">Outlook Money, 2,359 hospitals de-empanelled, 1,200 suspended (Lok Sabha reply), 2026</a>; <a href="https://www.medianama.com/2025/02/223-ayushman-bharat-fraud-is-aadhaar-authentication-denying-genuine-patients/">MediaNama, Ayushman Bharat fraud and Aadhaar authentication, 2025</a>.</p>
 
@@ -170,5 +170,6 @@
 <div id="ckbar" hidden role="dialog" aria-label="Cookie consent"><span>Allow analytics cookies? <a href="/privacy#cookies">Privacy</a></span><button id="ckno">Decline</button><button id="ckyes">Accept</button></div>
 <script>(function(){var y=document.querySelectorAll('.yr');for(var i=0;i<y.length;i++)y[i].textContent=new Date().getFullYear();})();</script>
 <script src="/assets/currency.js?v=4" defer></script>
+<script src="/assets/nav.js" defer></script>
 <script src="/assets/consent.js" defer></script>
 </body></html>

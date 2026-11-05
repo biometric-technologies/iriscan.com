@@ -14,7 +14,7 @@
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="../assets/style.css?v=20261105f">
+<link rel="stylesheet" href="../assets/style.css?v=20261105g">
 <link rel="preload" as="image" href="/assets/img/iriscan-particle-wave-background.webp" fetchpriority="high">
 <link rel="canonical" href="https://www.iriscan.com/post/biometric-credit-bureau">
 <meta property="og:type" content="article">
@@ -31,8 +31,8 @@
   <div class="wrap nav">
     <a class="brand" href="/"><svg class="brand-icon" viewBox="37.65 43.294 511.585 511.598" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="293.44" cy="299.1" r="136" fill="#fff"/><path d="M536.34 219.06c-21.16 64.09-66.99 116.98-126.25 147.41-1.93-39.3-12.98-78.7-33.99-115.1-21.01-36.38-49.62-65.68-82.65-86.98-56-36.11-124.74-49.37-190.87-35.61C181.54 40.09 314.45 15.9 421.32 77.6c24.26 14 45.35 31.37 63.03 51.2 23.61 26.48 41.15 57.31 51.99 90.26z" fill="#5cc8ff"/><path d="M176.78 366.45c-3.29 66.55 19.62 132.7 64.57 183.09-25.98-5.39-51.55-14.96-75.79-28.96C58.7 458.9 13.21 331.71 50.51 218.98c5.39-16.31 12.52-32.31 21.45-47.76 8.92-15.46 19.2-29.62 30.62-42.44 66.13-13.75 134.87-.5 190.87 35.61-33.06 21.3-61.66 50.57-82.67 86.98-21.02 36.4-32.07 75.81-34 115.08z" fill="#1c77c3"/><path d="M514.93 426.97c-37.9 65.68-100.54 108.15-169.36 122.51-33.97 7.09-69.46 7.32-104.22.06-44.95-50.39-67.86-116.54-64.57-183.09 34.99 17.97 74.64 28.1 116.66 28.1s81.67-10.13 116.64-28.08c59.27-30.43 105.1-83.32 126.25-147.41 22 66.76 16.51 142.25-21.4 207.91z" fill="#0a328f"/></svg><span>IRISCAN</span></a>
     <input type="checkbox" id="navtoggle">
-    <label class="burger" for="navtoggle">&#9776;</label>
-    <nav class="menu">
+    <label class="burger" for="navtoggle" role="button" tabindex="0" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">&#9776;</label>
+    <nav class="menu" id="site-menu" aria-label="Main">
       <div class="has-sub">
         <a href="/solutions/fintech">Solutions</a>
         <div class="sub">
@@ -90,7 +90,7 @@
 <p class="lead">Consider a farmer or a market trader who wants a small loan. A lender needs two things: to know who this person is, and to know how they repaid before. Often neither is available. The documents can be forged or absent, and there is no credit bureau that covers people outside the banking system. A biometric credit bureau solves both problems with one identifier that a person cannot lose, sell or change.</p>
 
 <h2>Why a document-based credit history does not work</h2>
-<p>A credit bureau links loans to a person through an identifier, usually a national ID number. This works where every adult has one reliable ID. According to the World Bank, around 850 million people have no official proof of identity, and about 1.3 billion adults still have no account, either at a financial institution or with a mobile money provider. Without a reliable identifier, a borrower who defaulted can simply come back under another name, and an honest borrower cannot prove a good repayment history to a new lender.</p>
+<p>A credit bureau links loans to a person through an identifier, usually a national ID number. This works where every adult has one reliable ID. According to the World Bank&rsquo;s 2025 ID4D dataset, about 800 million people had no official proof of identity in 2024, and about 1.3 billion adults still have no account, either at a financial institution or with a mobile money provider. Without a reliable identifier, a borrower who defaulted can simply come back under another name, and an honest borrower cannot prove a good repayment history to a new lender.</p>
 <p>On top of that, lenders lose money even with existing customers. Without a reliable identifier, the same person can borrow from several microfinance institutions at once, and none of them sees the total debt.</p>
 
 <h2>What changes when the identifier is biometric</h2>
@@ -98,7 +98,7 @@
 <p>For the farmers with the highest risk of default, the share of the loan repaid two months after the due date grew from 67% to 92%. Fingerprinting did not reduce the number of people who took loans, and the researchers estimated the benefit for the lender at 2.34 times the cost. For low-risk borrowers nothing changed. The researchers explain the effect on the riskiest borrowers by two things: they took smaller loans and diverted less of the inputs the loans were meant for. Note what the lender did not need: there was no shared database with other lenders. The effect came from borrowers knowing that this lender would recognize them under any name.</p>
 <p>The same logic works at national scale. Nigeria's Bank Verification Number links every bank customer to fingerprints and a face image. By the end of 2025, according to the CBN's annual report, 67.8 million people were enrolled, and the industry fraud watchlist held 13,117 BVNs. This way a person flagged at one bank cannot simply open a clean account at another.</p>
 
-<figure><img src="../assets/img/biometric-credit-bureau-flow.svg?v=11" alt="Biometric credit bureau flow between the bureau, the borrower and the lender" loading="lazy"><figcaption>The bureau issues a credential at enrollment; lenders verify the person and check for open loans without sharing personal data.</figcaption></figure>
+<figure><img src="../assets/img/biometric-credit-bureau-flow.svg?v=11" alt="Biometric credit bureau flow between the bureau, the borrower and the lender" loading="lazy"><figcaption>The bureau issues a credential at enrollment; lenders verify the issuer&rsquo;s signature and check authorized credit attributes, such as open loans, without exchanging biometric images or borrower names.</figcaption></figure>
 
 <h2>How a biometric credit bureau works</h2>
 <p>There are three parties: the borrower, the lender and the bureau.</p>
@@ -115,7 +115,7 @@
 <h2>What it takes to start</h2>
 <p>A bureau does not have to start at national scale. One lender with a network of agents can enroll its own borrowers and run de-duplication on its portfolio. When a second lender joins, the shared check starts to pay off for both of them. The technical parts already exist: the open-source <a href="https://docs.iriscan.com/sdk">Iriscan Biometric SDK</a> for capture and matching, the <a href="https://docs.iriscan.com/edge">Edge service</a> for offline agents, and the <a href="https://docs.iriscan.com/cloud-api">Cloud Iris API</a> or an on-premises deployment for the bureau itself.</p>
 
-<p class="sources">Sources: <a href="https://povertyactionlab.org/node/1584">J-PAL, Borrower Responses to Fingerprinting for Loan Enforcement in Malawi</a>; <a href="https://www.worldbank.org/en/news/press-release/2025/07/16/mobile-phone-technology-powers-saving-surge-in-developing-economies">World Bank, Global Findex 2025</a>; <a href="https://blogs.worldbank.org/en/digital-development/850-million-people-globally-dont-have-id-why-matters-and-what-we-can-do-about">World Bank, 850 million people globally don't have ID</a>; <a href="https://nairametrics.com/2026/07/30/fraud-watchlist-expands-by-38-as-banks-flag-13117-bvns-in-2025/">Nairametrics, BVN fraud watchlist 2025</a>.</p>
+<p class="sources">Sources: <a href="https://povertyactionlab.org/node/1584">J-PAL, Borrower Responses to Fingerprinting for Loan Enforcement in Malawi</a>; <a href="https://www.worldbank.org/en/news/press-release/2025/07/16/mobile-phone-technology-powers-saving-surge-in-developing-economies">World Bank, Global Findex 2025</a>; <a href="https://id4d.worldbank.org/global-dataset">World Bank, ID4D Global Dataset 2025</a>; <a href="https://nairametrics.com/2026/07/30/fraud-watchlist-expands-by-38-as-banks-flag-13117-bvns-in-2025/">Nairametrics, BVN fraud watchlist 2025</a>.</p>
 
 <p class="byline-bottom">Artem Poliakov, CEO of Iriscan.</p>
 
@@ -160,5 +160,6 @@
 <div id="ckbar" hidden role="dialog" aria-label="Cookie consent"><span>Allow analytics cookies? <a href="/privacy#cookies">Privacy</a></span><button id="ckno">Decline</button><button id="ckyes">Accept</button></div>
 <script>(function(){var y=document.querySelectorAll('.yr');for(var i=0;i<y.length;i++)y[i].textContent=new Date().getFullYear();})();</script>
 <script src="/assets/currency.js?v=4" defer></script>
+<script src="/assets/nav.js" defer></script>
 <script src="/assets/consent.js" defer></script>
 </body></html>

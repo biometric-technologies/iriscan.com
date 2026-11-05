@@ -15,7 +15,7 @@
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/style.css?v=20261105f">
+<link rel="stylesheet" href="assets/style.css?v=20261105g">
 <link rel="canonical" href="https://www.iriscan.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Iriscan">
@@ -31,8 +31,8 @@
   <div class="wrap nav">
     <a class="brand" href="/"><svg class="brand-icon" viewBox="37.65 43.294 511.585 511.598" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="293.44" cy="299.1" r="136" fill="#fff"/><path d="M536.34 219.06c-21.16 64.09-66.99 116.98-126.25 147.41-1.93-39.3-12.98-78.7-33.99-115.1-21.01-36.38-49.62-65.68-82.65-86.98-56-36.11-124.74-49.37-190.87-35.61C181.54 40.09 314.45 15.9 421.32 77.6c24.26 14 45.35 31.37 63.03 51.2 23.61 26.48 41.15 57.31 51.99 90.26z" fill="#5cc8ff"/><path d="M176.78 366.45c-3.29 66.55 19.62 132.7 64.57 183.09-25.98-5.39-51.55-14.96-75.79-28.96C58.7 458.9 13.21 331.71 50.51 218.98c5.39-16.31 12.52-32.31 21.45-47.76 8.92-15.46 19.2-29.62 30.62-42.44 66.13-13.75 134.87-.5 190.87 35.61-33.06 21.3-61.66 50.57-82.67 86.98-21.02 36.4-32.07 75.81-34 115.08z" fill="#1c77c3"/><path d="M514.93 426.97c-37.9 65.68-100.54 108.15-169.36 122.51-33.97 7.09-69.46 7.32-104.22.06-44.95-50.39-67.86-116.54-64.57-183.09 34.99 17.97 74.64 28.1 116.66 28.1s81.67-10.13 116.64-28.08c59.27-30.43 105.1-83.32 126.25-147.41 22 66.76 16.51 142.25-21.4 207.91z" fill="#0a328f"/></svg><span>IRISCAN</span></a>
     <input type="checkbox" id="navtoggle">
-    <label class="burger" for="navtoggle">&#9776;</label>
-    <nav class="menu">
+    <label class="burger" for="navtoggle" role="button" tabindex="0" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">&#9776;</label>
+    <nav class="menu" id="site-menu" aria-label="Main">
       <div class="has-sub">
         <a href="/solutions/fintech">Solutions</a>
         <div class="sub">
@@ -87,19 +87,19 @@
 <div class="wrap">
 <p class="sol-eyebrow">Open-source biometrics</p>
 <h1 class="anim a-left">One person, one identity.</h1>
-<p class="lead" data-cur>We check that each person in your register is enrolled only once, by iris, face or fingerprints. Someone who already has a loan, a benefit or a patient file with you is found even under a different name. You buy a USB scanner (from about $50), start a trial and get a key to our cloud. It costs from $99 a month.</p>
+<p class="lead" data-cur>We check that each person in your register is enrolled only once. Someone who already has a loan, a benefit or a patient file with you is flagged even under a different name. For iris, you buy a USB scanner (from about $50), start a trial and get a key to our cloud, from $99 a month. Face and fingerprint checks run in your own app with our open-source SDK or come as integration projects.</p>
 <p class="sol-actions"><a class="btn" href="/get-started?interest=trial">Request a 14-day trial</a> <a class="btn ghost" href="/pricing#fraud">What duplicates cost you</a></p>
 </div></section>
 
 <section class="manifesto-band"><div class="wrap sol">
 <p class="manifesto">Identity is too important to be a black box.</p>
-<p class="lead-big">So we build biometrics in the open. Our SDK and converters are on <a href="https://github.com/biometric-technologies">GitHub</a>, every template is stored in an ISO format, and the same matcher runs on our cloud or on your own servers. A lender, a clinic, an aid agency or a national registry can check what it runs, own its data and leave whenever it wants.</p>
+<p class="lead-big">So we build biometrics in the open. Our SDK and converters are on <a href="https://github.com/biometric-technologies">GitHub</a>, iris and face images are kept in standard ISO records, so another matcher can compute its own templates from them, and the same matcher runs on our cloud or on your own servers. A lender, a clinic, an aid agency or a national registry can check what it runs, own its data and leave whenever it wants.</p>
 </div></section>
 
 <section class="before-footer"><div class="wrap sol">
 <h2>Who it is for</h2>
 <div class="sol-cards">
-<div class="sol-card has-photo"><img class="sol-photo" loading="lazy" decoding="async" src="assets/img/lenders/designer-polka-dot-studio-card.jpg" alt="A young fashion designer reviewing sketches in her studio" width="640" height="400"><h3>Lenders and microfinance</h3><p>Whether you lend to farmers, market traders or shop owners, a borrower who defaulted cannot come back under another name. In a Malawi field trial, repayment among the riskiest borrowers went from 67% to 92% once they were fingerprinted.</p><a class="more" href="/solutions/fintech">Fintech and microfinance &rarr;</a></div>
+<div class="sol-card has-photo"><img class="sol-photo" loading="lazy" decoding="async" src="assets/img/lenders/designer-polka-dot-studio-card.jpg" alt="A young woman with a clipboard among the clothes in her shop" width="640" height="400"><h3>Lenders and microfinance</h3><p>Whether you lend to farmers, market traders or shop owners, a borrower who defaulted cannot come back under another name. In a Malawi field trial, repayment among the riskiest borrowers went from 67% to 92% once they were fingerprinted.</p><a class="more" href="/solutions/fintech">Fintech and microfinance &rarr;</a></div>
 <div class="sol-card has-photo"><img class="sol-photo" loading="lazy" decoding="async" src="assets/img/blog/laptop-stethoscope-desk-640.jpg" alt="A stethoscope next to a laptop on a clinic desk" width="640" height="400"><h3>Clinics and insurers</h3><p>One patient, one record, and a membership card that does not work for a relative.</p><a class="more" href="/solutions/healthcare">Hospitals</a> &middot; <a class="more" href="/solutions/health-insurance">Health insurance &rarr;</a></div>
 <div class="sol-card has-photo"><img class="sol-photo" loading="lazy" decoding="async" src="assets/img/blog/nigerian-woman-zaria-close-640.jpg" alt="A smiling young woman in Zaria, Nigeria" width="640" height="400"><h3>NGOs and aid programs</h3><p>Each person registered once and served once, with or without documents, offline in the field.</p><a class="more" href="/solutions/humanitarian">NGOs and aid programs &rarr;</a></div>
 <div class="sol-card has-photo"><img class="sol-photo" loading="lazy" decoding="async" src="assets/img/blog/ballot-box-vote-640.jpg" alt="A ballot going into a ballot box" width="640" height="400"><h3>Governments and public registers</h3><p>One person, one record in voter, social and civil registers, with the matcher on government servers when the data must stay in the country.</p><a class="more" href="/solutions/government">Elections and public registers &rarr;</a></div>
@@ -117,8 +117,8 @@
 
 <h2>How it works</h2>
 <ol class="sol-steps illustrated">
-<li><img class="step-ico" src="assets/img/steps/step-scanner.svg" alt="" width="45" height="80"><b>Buy a scanner.</b> A <a href="/iris-scanners">supported USB iris scanner</a> from about $50 connects to the laptop or Android tablet you already use.</li>
-<li><img class="step-ico cloud" src="assets/img/steps/step-cloud.svg" alt="" width="131" height="80"><b>Enroll on our cloud.</b> Each person is scanned once and checked against everyone already enrolled, so nobody is registered twice.</li>
+<li><img class="step-ico" src="assets/img/steps/step-scanner.svg" alt="" width="45" height="80"><b>Buy a scanner.</b> A <a href="/iris-scanners">supported USB iris scanner</a> from about $50 connects to a Windows or Linux laptop you already use.</li>
+<li><img class="step-ico cloud" src="assets/img/steps/step-cloud.svg" alt="" width="131" height="80"><b>Enroll on our cloud.</b> Each person is scanned once and checked against everyone already enrolled, so a second registration is flagged for review.</li>
 <li><img class="step-ico" src="assets/img/steps/step-identify.svg" alt="" width="47" height="80"><b>Identify in seconds.</b> Next time the person looks at the scanner and you get their record, without a card or a document.</li>
 </ol>
 
@@ -175,5 +175,6 @@
 <div id="ckbar" hidden role="dialog" aria-label="Cookie consent"><span>Allow analytics cookies? <a href="/privacy#cookies">Privacy</a></span><button id="ckno">Decline</button><button id="ckyes">Accept</button></div>
 <script>(function(){var y=document.querySelectorAll('.yr');for(var i=0;i<y.length;i++)y[i].textContent=new Date().getFullYear();})();</script>
 <script src="/assets/currency.js?v=4" defer></script>
+<script src="/assets/nav.js" defer></script>
 <script src="/assets/consent.js" defer></script>
 </body></html>

@@ -14,7 +14,7 @@
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="../assets/style.css?v=20261105f">
+<link rel="stylesheet" href="../assets/style.css?v=20261105g">
 <link rel="preload" as="image" href="/assets/img/iriscan-particle-wave-background.webp" fetchpriority="high">
 <link rel="canonical" href="https://www.iriscan.com/post/how-does-iris-recognition-work">
 <meta property="og:type" content="article">
@@ -31,8 +31,8 @@
   <div class="wrap nav">
     <a class="brand" href="/"><svg class="brand-icon" viewBox="37.65 43.294 511.585 511.598" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="293.44" cy="299.1" r="136" fill="#fff"/><path d="M536.34 219.06c-21.16 64.09-66.99 116.98-126.25 147.41-1.93-39.3-12.98-78.7-33.99-115.1-21.01-36.38-49.62-65.68-82.65-86.98-56-36.11-124.74-49.37-190.87-35.61C181.54 40.09 314.45 15.9 421.32 77.6c24.26 14 45.35 31.37 63.03 51.2 23.61 26.48 41.15 57.31 51.99 90.26z" fill="#5cc8ff"/><path d="M176.78 366.45c-3.29 66.55 19.62 132.7 64.57 183.09-25.98-5.39-51.55-14.96-75.79-28.96C58.7 458.9 13.21 331.71 50.51 218.98c5.39-16.31 12.52-32.31 21.45-47.76 8.92-15.46 19.2-29.62 30.62-42.44 66.13-13.75 134.87-.5 190.87 35.61-33.06 21.3-61.66 50.57-82.67 86.98-21.02 36.4-32.07 75.81-34 115.08z" fill="#1c77c3"/><path d="M514.93 426.97c-37.9 65.68-100.54 108.15-169.36 122.51-33.97 7.09-69.46 7.32-104.22.06-44.95-50.39-67.86-116.54-64.57-183.09 34.99 17.97 74.64 28.1 116.66 28.1s81.67-10.13 116.64-28.08c59.27-30.43 105.1-83.32 126.25-147.41 22 66.76 16.51 142.25-21.4 207.91z" fill="#0a328f"/></svg><span>IRISCAN</span></a>
     <input type="checkbox" id="navtoggle">
-    <label class="burger" for="navtoggle">&#9776;</label>
-    <nav class="menu">
+    <label class="burger" for="navtoggle" role="button" tabindex="0" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">&#9776;</label>
+    <nav class="menu" id="site-menu" aria-label="Main">
       <div class="has-sub">
         <a href="/solutions/fintech">Solutions</a>
         <div class="sub">
@@ -91,14 +91,14 @@
 
 <h2>1. Capture</h2>
 <p>Iris cameras photograph the eye in near-infrared light, roughly 700–900 nm. Why not in normal light? In visible light a dark brown iris looks almost uniform, and most people in the world have brown eyes. In infrared the same iris shows its crypts, furrows and rings, because melanin absorbs much less infrared than visible light. On top of that, the camera brings its own illumination, so a picture taken in a sunny office and one taken in a dim tent look alike.</p>
-<p>The standards ask for about 150–200 pixels across the iris. A dedicated scanner, such as an Iritech IriShield on a USB cable or a <a href="/post/vista-ey2-dual-iris-and-face-camera">Vista EY2</a> on a desk, gets there at 20–40 cm. A phone camera without infrared illumination usually does not, which is why phones use face recognition rather than iris.</p>
+<p>The standards ask for about 150–200 pixels across the iris. A dedicated scanner gets there at the distance it is built for, which depends on the model: about 5 cm for the handheld IriTech IriShield MK 2120U, about 15 cm for the MK 2120UL, and tens of centimetres for desk cameras such as the <a href="/post/vista-ey2-dual-iris-and-face-camera">Vista EY2</a>. A phone camera without infrared illumination usually does not, which is why phones use face recognition rather than iris.</p>
 <p>A good scanner also checks quality before it keeps a frame: focus, motion blur, how open the eye is, gaze direction. Most errors in iris recognition start at this stage. This way a scanner that refuses a blurry frame saves a lot of trouble later.</p>
 
 <h2>2. Segmentation</h2>
 <p>Then the software locates two boundaries: the pupil (inner) and the limbus, where the iris meets the white of the eye (outer). Classic algorithms fit circles with an integro-differential operator or a Hough transform. Newer ones use neural networks and fit ellipses, which works better when the person does not look straight into the camera.</p>
 <p>It also marks what is not iris: eyelids, eyelashes, reflections of the illuminator. These areas go into a mask. They are not deleted, just excluded from the comparison later.</p>
 
-<figure><img src="../assets/img/iris-recognition-pipeline.svg?v=3" alt="Iris recognition pipeline: capture, segmentation, unwrapping and encoding into an iris code" loading="lazy"><figcaption>From an eye image to an iris code and its mask.</figcaption></figure>
+<figure><img src="../assets/img/iris-recognition-pipeline.svg?v=4" alt="Iris recognition pipeline: capture, segmentation, unwrapping and encoding into an iris code" loading="lazy"><figcaption>From an eye image to an iris code and its mask.</figcaption></figure>
 
 <h2>3. Unwrapping</h2>
 <p>The pupil dilates and contracts, and the eye is never at exactly the same distance from the camera. So how to compare two irises? The ring between the two boundaries is mapped onto a fixed rectangle: angle along one axis, distance from pupil to limbus along the other. This is Daugman's "rubber sheet" model. After it, a point on the iris lands in the same cell of the rectangle regardless of the pupil size.</p>
@@ -118,7 +118,7 @@
 <li><b>Segmentation, unwrapping and encoding</b> can run on the edge device, on a phone or on a server. The open-source <a href="https://docs.iriscan.com/sdk">Iriscan Biometric SDK</a> does it on Android, iOS and the JVM.</li>
 <li><b>Comparison</b> against a database runs where the database is. The <a href="https://docs.iriscan.com/cloud-api">Cloud Iris API</a> enrolls left and right eyes of each person and offers 1:N search and 1:1 verification. The Edge service keeps an encrypted local copy, so matching works offline as well.</li>
 </ul>
-<p>Whatever runs where, we recommend keeping templates in a standard record format, ISO/IEC 19794-6 or its successor 39794-6. If templates are stored in a vendor's own format, changing the matcher later means re-enrolling everyone.</p>
+<p>Whatever runs where, we recommend keeping the iris images, not only the templates, in a standard record format: ISO/IEC 19794-6 or its successor 39794-6. An iris code belongs to the algorithm that computed it, so another matcher cannot use it. With the images at hand, changing the matcher means computing new templates; without them, it means scanning everyone again.</p>
 
 <p class="byline-bottom">Artem Poliakov, CEO of Iriscan.</p>
 
@@ -126,7 +126,7 @@
 <h3>Building on iris recognition?</h3>
 <p>The SDK and the converter are open source; the Cloud Iris API and the Edge service run from $99 a month with a 14-day free trial, or as a pilot on your own data. Write us whom you need to identify, how many people and on what hardware, and we will propose a setup.</p>
 <p class="cta-kit">Buy a <a href="/iris-scanners">supported USB iris scanner</a> yourself and <a href="/get-started?interest=trial">request a 14-day trial</a>, or let us ship everything: the <a href="/pricing#starter">$590 starter kit</a> has a scanner, three months of the cloud and setup.</p>
-<p><a class="btn" href="/get-started">Talk to an engineer</a> <a class="btn ghost" href="https://docs.iriscan.com/cloud-api">Read the API docs</a></p>
+<p><a class="btn" href="/get-started?interest=sdk">Talk to an engineer</a> <a class="btn ghost" href="https://docs.iriscan.com/cloud-api">Read the API docs</a></p>
 </aside>
 <div class="readnext"><h3>Read next</h3><ul>
 <li><a href="/post/the-power-of-the-eye-iris-identification">Iris Identification at National Scale</a></li>
@@ -163,5 +163,6 @@
 <div id="ckbar" hidden role="dialog" aria-label="Cookie consent"><span>Allow analytics cookies? <a href="/privacy#cookies">Privacy</a></span><button id="ckno">Decline</button><button id="ckyes">Accept</button></div>
 <script>(function(){var y=document.querySelectorAll('.yr');for(var i=0;i<y.length;i++)y[i].textContent=new Date().getFullYear();})();</script>
 <script src="/assets/currency.js?v=4" defer></script>
+<script src="/assets/nav.js" defer></script>
 <script src="/assets/consent.js" defer></script>
 </body></html>

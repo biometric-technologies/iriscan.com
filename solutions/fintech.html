@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Iris Verification and Duplicate Borrower Detection for Lenders | Iriscan</title>
-<meta name="description" content="Biometric onboarding and iris de-duplication for lenders, fintechs and agent networks: recognize repeat borrowers under any name.">
+<meta name="description" content="Biometric onboarding and iris de-duplication for lenders, fintechs and agent networks: recognize repeat borrowers even when their details change.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&family=Open+Sans:wght@400;600;700&family=Raleway:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
@@ -14,13 +14,13 @@
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/style.css?v=20261105f">
+<link rel="stylesheet" href="/assets/style.css?v=20261105g">
 <link rel="preload" as="image" href="/assets/img/iriscan-particle-wave-background.webp" fetchpriority="high">
 <link rel="canonical" href="https://www.iriscan.com/solutions/fintech">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Iriscan">
 <meta property="og:title" content="Iris Verification and Duplicate Borrower Detection for Lenders | Iriscan">
-<meta property="og:description" content="Biometric onboarding and iris de-duplication for lenders, fintechs and agent networks: recognize repeat borrowers under any name.">
+<meta property="og:description" content="Biometric onboarding and iris de-duplication for lenders, fintechs and agent networks: recognize repeat borrowers even when their details change.">
 <meta property="og:url" content="https://www.iriscan.com/solutions/fintech">
 <meta property="og:image" content="https://www.iriscan.com/assets/img/biometric-credit-bureau-flow.jpg?v=20">
 <meta name="twitter:card" content="summary_large_image">
@@ -30,8 +30,8 @@
   <div class="wrap nav">
     <a class="brand" href="/"><svg class="brand-icon" viewBox="37.65 43.294 511.585 511.598" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="293.44" cy="299.1" r="136" fill="#fff"/><path d="M536.34 219.06c-21.16 64.09-66.99 116.98-126.25 147.41-1.93-39.3-12.98-78.7-33.99-115.1-21.01-36.38-49.62-65.68-82.65-86.98-56-36.11-124.74-49.37-190.87-35.61C181.54 40.09 314.45 15.9 421.32 77.6c24.26 14 45.35 31.37 63.03 51.2 23.61 26.48 41.15 57.31 51.99 90.26z" fill="#5cc8ff"/><path d="M176.78 366.45c-3.29 66.55 19.62 132.7 64.57 183.09-25.98-5.39-51.55-14.96-75.79-28.96C58.7 458.9 13.21 331.71 50.51 218.98c5.39-16.31 12.52-32.31 21.45-47.76 8.92-15.46 19.2-29.62 30.62-42.44 66.13-13.75 134.87-.5 190.87 35.61-33.06 21.3-61.66 50.57-82.67 86.98-21.02 36.4-32.07 75.81-34 115.08z" fill="#1c77c3"/><path d="M514.93 426.97c-37.9 65.68-100.54 108.15-169.36 122.51-33.97 7.09-69.46 7.32-104.22.06-44.95-50.39-67.86-116.54-64.57-183.09 34.99 17.97 74.64 28.1 116.66 28.1s81.67-10.13 116.64-28.08c59.27-30.43 105.1-83.32 126.25-147.41 22 66.76 16.51 142.25-21.4 207.91z" fill="#0a328f"/></svg><span>IRISCAN</span></a>
     <input type="checkbox" id="navtoggle">
-    <label class="burger" for="navtoggle">&#9776;</label>
-    <nav class="menu">
+    <label class="burger" for="navtoggle" role="button" tabindex="0" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">&#9776;</label>
+    <nav class="menu" id="site-menu" aria-label="Main">
       <div class="has-sub">
         <a href="/solutions/fintech">Solutions</a>
         <div class="sub">
@@ -86,8 +86,8 @@
 <div class="wrap">
 <p class="sol-eyebrow">Solutions · Fintech and microfinance</p>
 <h1 class="anim a-left">Know who you lend to, and let borrowers know it too</h1>
-<p class="lead lead-big anim a-left" style="--d:.2s">Biometric onboarding and de-duplication for lenders, fintechs and agent networks. A borrower who has been scanned once is recognized under any name, and knowing that changes how people repay.</p>
-<p class="sol-actions"><a class="btn" href="/get-started">Discuss your use case</a> <a class="btn ghost" href="/post/enhancing-security-the-advantages-of-biometric-verification">Read: guide for lenders</a></p>
+<p class="lead lead-big anim a-left" style="--d:.2s">Biometric onboarding and de-duplication for lenders, fintechs and agent networks. A borrower who has been scanned once is found again even under another name, and knowing that changes how people repay.</p>
+<p class="sol-actions"><a class="btn" href="/get-started?interest=pilot">Discuss your use case</a> <a class="btn ghost" href="/post/enhancing-security-the-advantages-of-biometric-verification">Read: guide for lenders</a></p>
 </div></section>
 
 <section><div class="wrap sol">
@@ -102,11 +102,11 @@
 <li><b>Answer.</b> A new client gets the loan as usual. A known one shows up with their old record and repayments, whatever name is on today's form.</li>
 </ol>
 </div>
-<figure class="pw-photo"><img loading="lazy" decoding="async" src="/assets/img/lenders/designer-polka-dot-studio-portrait.jpg" alt="A young fashion designer reviewing sketches in her studio" width="400" height="600"><figcaption class="credit">Photo: Sou Jest / Unsplash</figcaption></figure>
+<figure class="pw-photo"><img loading="lazy" decoding="async" src="/assets/img/lenders/designer-polka-dot-studio-portrait.jpg" alt="A young woman with a clipboard among the clothes in her shop" width="400" height="600"><figcaption class="credit">Photo: Sou Jest / Unsplash</figcaption></figure>
 </div>
 <div class="sol-cards two" style="margin-top:1.2rem">
 <div class="sol-card"><h3>An example with round numbers</h3><p>Suppose you issue 2,000 loans a year, $300 each on average, and 2 in every 100 go to someone who already defaulted with you under another name. That is 40 loans, or $12,000 a year you will not see again. The first year of iris checks costs $1,378 without VAT: $99 a month for the cloud and one $190 scanner. Stop only half of those loans and you keep $6,000, more than four times the cost. The numbers are made up for illustration; try it with your own.</p><div class="pw-bars" role="img" aria-label="Iris checks, first year $1,378, Loans you keep $6,000"><div class="pw-row"><span>Iris checks, first year</span><div class="pw-track"><i class="pw-bar cost" style="width:23%"></i></div><b>$1,378</b></div><div class="pw-row"><span>Loans you keep</span><div class="pw-track"><i class="pw-bar save" style="width:100%"></i></div><b>$6,000</b></div></div></div>
-<div class="sol-card" data-cur><h3>What you need to start</h3><p>One <a href="/iris-scanners">USB iris scanner</a> per branch, on the laptop or Android tablet your staff already use, and the cloud, which costs $99 a month for up to 25,000 clients. The starter kit includes a scanner and the first three months, plus remote setup and a training session. A larger agent network begins with a pilot at a few agents.</p></div>
+<div class="sol-card" data-cur><h3>What you need to start</h3><p>One <a href="/iris-scanners">USB iris scanner</a> per branch, on a Windows or Linux laptop your staff already use (Android tablets work through an app built with our SDK), and the cloud, which costs $99 a month for up to 25,000 clients. The starter kit includes a scanner and the first three months, plus remote setup and a training session. A larger agent network begins with a pilot at a few agents.</p></div>
 </div>
 <p class="sol-actions"><a class="btn" href="/pricing#starter">See the starter kit</a> <a class="btn ghost" href="/get-started?interest=kit">Ask us about your branch</a></p>
 
@@ -124,7 +124,7 @@
 <div class="sol-stats">
 <div><b>67% → 92%</b><span>share of the loan repaid by the riskiest borrowers, without and with fingerprinting at application</span><a href="https://povertyactionlab.org/node/1584">J-PAL, Malawi field experiment</a></div>
 <div><b>2.34×</b><span>estimated benefit for the lender relative to the cost of fingerprinting in the same experiment</span><a href="https://povertyactionlab.org/node/1584">J-PAL, Malawi field experiment</a></div>
-<div><b>~850 million</b><span>people worldwide have no official proof of identity</span><a href="https://blogs.worldbank.org/en/digital-development/850-million-people-globally-dont-have-id-why-matters-and-what-we-can-do-about">World Bank, ID4D</a></div>
+<div><b>~800 million</b><span>people worldwide had no official proof of identity in 2024</span><a href="https://id4d.worldbank.org/global-dataset">World Bank, ID4D 2025</a></div>
 </div>
 
 <h2>The effect starts before the first match</h2>
@@ -133,13 +133,13 @@
 <h2>What you get</h2>
 <div class="sol-cards">
 <div class="sol-card"><h3>Onboarding on the phone</h3><p>Face capture, passive liveness and selfie-to-document comparison inside your app with the open-source <a href="https://docs.iriscan.com/sdk">Biometric SDK</a> (Android, iOS, React Native). No per-check fees, and images do not have to leave the device.</p></div>
-<div class="sol-card"><h3>De-duplication in your portfolio</h3><p>Each new applicant is searched against every borrower you have enrolled. A second account under another name is flagged before the loan is issued, and existing duplicates surface as borrowers come back.</p></div>
-<div class="sol-card"><h3>Agents and branches offline</h3><p>A USB iris scanner on the laptop or Android tablet the agent already uses, with the <a href="https://docs.iriscan.com/edge">Edge service</a>. It keeps working without a connection and synchronizes later.</p></div>
+<div class="sol-card"><h3>De-duplication in your portfolio</h3><p>Each new applicant is searched against every borrower you have enrolled. A second account under another name is flagged before the loan is issued, and existing duplicates are found as returning borrowers are scanned and linked to their old accounts.</p></div>
+<div class="sol-card"><h3>Agents and branches offline</h3><p>A USB iris scanner on a Windows or Linux laptop with the <a href="https://docs.iriscan.com/edge">Edge service</a>. Without a connection it checks against the register as of the last synchronization; enrollments made elsewhere in the meantime are checked once it reconnects, and any conflict goes to review.</p></div>
 <div class="sol-card"><h3>A history tied to the person</h3><p>Repayment history in your portfolio belongs to the person, not to a document number. A good borrower keeps their record when they change a phone or an ID card, and a defaulter cannot start again with a clean name.</p></div>
 </div>
 
 <h2>Duplicate borrower detection for microfinance and loan agents</h2>
-<p>Most duplicate borrowers are not caught at head office but missed in the field: an agent opens an account for a person who already has one at another branch, under a slightly different name or with a borrowed document. With an iris scanner on the agent's laptop or tablet, every application is checked against the whole portfolio before the loan is approved. A match shows the existing borrower and their repayment record; no match means a genuinely new client. See how the <a href="/iris-deduplication">1:N iris de-duplication</a> works and what accuracy to expect for a portfolio of your size.</p>
+<p>Most duplicate borrowers are not caught at head office but missed in the field: an agent opens an account for a person who already has one at another branch, under a slightly different name or with a borrowed document. With an iris scanner on the agent's laptop, every application is checked against the whole enrolled portfolio before the loan is approved (offline, against the copy from the last synchronization). A match shows the existing borrower and their repayment record for a staff member to review; no match means nobody in your enrolled register scored above the matching threshold. The credit decision itself stays your usual one. See how the <a href="/iris-deduplication">1:N iris de-duplication</a> works and what accuracy to expect for a portfolio of your size.</p>
 
 <h2>How it works for the borrower</h2>
 <ol class="sol-steps">
@@ -155,12 +155,12 @@
 </div>
 
 <h2>How we start</h2>
-<p>We recommend a short pilot: enroll a few thousand existing borrowers at several agents and run de-duplication against them. In a few weeks you get the number of duplicate identities in your portfolio, the false rejection rate on your own population and hardware, and the cost per check. New applicants are enrolled at the same time, so you can compare their repayment with borrowers who joined before. This gives you the business case before any large investment.</p>
+<p>We recommend a short pilot: enroll a few thousand existing borrowers at several agents and run de-duplication against them. In a few weeks you get the number of duplicate identities among the borrowers enrolled, the false rejection rate on your own population and hardware, and the cost per check. New applicants are enrolled at the same time; the effect on repayment shows only after a full repayment cycle, so compare it later. This gives you the business case before any large investment.</p>
 
 <h2>Next: a shared check between lenders</h2>
 <p>Fraudsters move between lenders, and one lender's database cannot see that. When several lenders use the same identification, they can ask "does this person have an open loan elsewhere?" without exchanging names, photos or iris images. In the EU-funded <a href="/post/web3-biometric-bureau-verifiable-credit-history">INGRESS project</a> we built a prototype of it: a biometric bureau that issues verifiable credentials bound to a person, and a credit bureau that keeps loan records. It makes sense once several lenders in a market take part, and the template enrolled in your pilot is the same one it will use.</p>
 
-<figure class="sol-fig"><img src="/assets/img/biometric-credit-bureau-flow.svg?v=11" alt="Biometric credit bureau flow between the bureau, the borrower and the lender" loading="lazy"><figcaption>The next step: a shared bureau lets lenders check for open loans without sharing personal data.</figcaption></figure>
+<figure class="sol-fig"><img src="/assets/img/biometric-credit-bureau-flow.svg?v=11" alt="Biometric credit bureau flow between the bureau, the borrower and the lender" loading="lazy"><figcaption>The next step: a shared bureau lets lenders check authorized credit attributes, such as open loans, without exchanging biometric images or borrower names.</figcaption></figure>
 
 <aside class="cta">
 <h3>Losing money to repeat borrowers under new names?</h3>
@@ -200,5 +200,6 @@
 <div id="ckbar" hidden role="dialog" aria-label="Cookie consent"><span>Allow analytics cookies? <a href="/privacy#cookies">Privacy</a></span><button id="ckno">Decline</button><button id="ckyes">Accept</button></div>
 <script>(function(){var y=document.querySelectorAll('.yr');for(var i=0;i<y.length;i++)y[i].textContent=new Date().getFullYear();})();</script>
 <script src="/assets/currency.js?v=4" defer></script>
+<script src="/assets/nav.js" defer></script>
 <script src="/assets/consent.js" defer></script>
 </body></html>

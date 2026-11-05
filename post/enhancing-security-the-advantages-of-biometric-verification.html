@@ -14,7 +14,7 @@
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="../assets/style.css?v=20261105f">
+<link rel="stylesheet" href="../assets/style.css?v=20261105g">
 <link rel="preload" as="image" href="/assets/img/iriscan-particle-wave-background.webp" fetchpriority="high">
 <link rel="canonical" href="https://www.iriscan.com/post/enhancing-security-the-advantages-of-biometric-verification">
 <meta property="og:type" content="article">
@@ -31,8 +31,8 @@
   <div class="wrap nav">
     <a class="brand" href="/"><svg class="brand-icon" viewBox="37.65 43.294 511.585 511.598" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="293.44" cy="299.1" r="136" fill="#fff"/><path d="M536.34 219.06c-21.16 64.09-66.99 116.98-126.25 147.41-1.93-39.3-12.98-78.7-33.99-115.1-21.01-36.38-49.62-65.68-82.65-86.98-56-36.11-124.74-49.37-190.87-35.61C181.54 40.09 314.45 15.9 421.32 77.6c24.26 14 45.35 31.37 63.03 51.2 23.61 26.48 41.15 57.31 51.99 90.26z" fill="#5cc8ff"/><path d="M176.78 366.45c-3.29 66.55 19.62 132.7 64.57 183.09-25.98-5.39-51.55-14.96-75.79-28.96C58.7 458.9 13.21 331.71 50.51 218.98c5.39-16.31 12.52-32.31 21.45-47.76 8.92-15.46 19.2-29.62 30.62-42.44 66.13-13.75 134.87-.5 190.87 35.61-33.06 21.3-61.66 50.57-82.67 86.98-21.02 36.4-32.07 75.81-34 115.08z" fill="#1c77c3"/><path d="M514.93 426.97c-37.9 65.68-100.54 108.15-169.36 122.51-33.97 7.09-69.46 7.32-104.22.06-44.95-50.39-67.86-116.54-64.57-183.09 34.99 17.97 74.64 28.1 116.66 28.1s81.67-10.13 116.64-28.08c59.27-30.43 105.1-83.32 126.25-147.41 22 66.76 16.51 142.25-21.4 207.91z" fill="#0a328f"/></svg><span>IRISCAN</span></a>
     <input type="checkbox" id="navtoggle">
-    <label class="burger" for="navtoggle">&#9776;</label>
-    <nav class="menu">
+    <label class="burger" for="navtoggle" role="button" tabindex="0" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">&#9776;</label>
+    <nav class="menu" id="site-menu" aria-label="Main">
       <div class="has-sub">
         <a href="/solutions/fintech">Solutions</a>
         <div class="sub">
@@ -86,7 +86,7 @@
 <div class="meta-top"><span>Oct 29, 2026 &middot; 4 min read</span></div>
 <h1>Biometric Verification Against Identity Fraud: A Guide for Lenders</h1>
 <div class="portrait-intro">
-<figure class="portrait-photo"><img src="../assets/img/lenders/designer-polka-dot-studio-portrait.jpg" alt="A young fashion designer reviewing sketches in her studio" width="800" height="1200"><figcaption class="credit">Photo: <a href="https://unsplash.com/@soujest?utm_source=iriscan&amp;utm_medium=referral" rel="nofollow noopener">Sou Jest</a> / <a href="https://unsplash.com/?utm_source=iriscan&amp;utm_medium=referral" rel="nofollow noopener">Unsplash</a></figcaption></figure>
+<figure class="portrait-photo"><img src="../assets/img/lenders/designer-polka-dot-studio-portrait.jpg" alt="A young woman with a clipboard among the clothes in her shop" width="800" height="1200"><figcaption class="credit">Photo: <a href="https://unsplash.com/@soujest?utm_source=iriscan&amp;utm_medium=referral" rel="nofollow noopener">Sou Jest</a> / <a href="https://unsplash.com/?utm_source=iriscan&amp;utm_medium=referral" rel="nofollow noopener">Unsplash</a></figcaption></figure>
 <div class="portrait-copy">
 <p class="lead">Iriscan started from a lending problem. Consider a microfinance company whose borrowers may not have an ID card, or have one that is easy to borrow or buy. The loss here is very specific: the same person takes loans under different names and never repays any of them. Biometric verification is the cheapest reliable fix we know, as long as it is designed for this problem and not copied from a bank onboarding flow built for a different one.</p>
 
@@ -110,14 +110,14 @@
 <p>Face works on any phone, so it is the natural choice for self-service apps and for 1:1 checks. Its weakness is 1:N search at scale: as the database grows, look-alikes and family members start producing false hits, and a skilled fraudster can change appearance.</p>
 <p>Iris needs a scanner, but it separates people far better, which makes it the right tool for de-duplication. A handheld USB scanner costs from about $50 to about $190 and plugs into the laptop or the Android tablet that an agent or a branch already uses. This way a lender with a network of agents can enroll each borrower once by iris and use face on the phone for everything after that.</p>
 
-<figure><img src="../assets/img/far-frr-eer-diagram.svg" alt="False acceptance and false rejection rates plotted against the acceptance threshold" loading="lazy"><figcaption>Every matcher trades false acceptance for false rejection. Where to sit on this curve is a business decision.</figcaption></figure>
+<figure><img src="../assets/img/far-frr-eer-diagram.svg" alt="False acceptance and false rejection rates plotted against the acceptance threshold" loading="lazy"><figcaption>Every matcher trades false acceptance for false rejection. The horizontal axis is the threshold on similarity: further right, matching is stricter. Where to sit on this curve is a business decision. Illustrative diagram, not an Iriscan benchmark.</figcaption></figure>
 
 <h2>Liveness</h2>
 <p>A face check without liveness detection can be passed with a printed photo or with a video played on another phone. At minimum, a passive liveness model should run on the selfie. For higher-risk actions, add a challenge such as "turn your head left", checked from the head pose. Iris capture with a dedicated scanner and an operator present is much harder to fool.</p>
 
 <h2>The deterrent works from day one</h2>
 <p>The strongest effect of biometrics does not need a large database. In a field experiment in Malawi, the riskiest borrowers who were fingerprinted at application repaid 92% of their loans two months after the due date, against 67% for those who were not. The lender shared data with nobody. Borrowers simply knew that they would be recognized under any name, so a default could not be left behind. Ghana's national health insurer saw the same thing: an official called its biometric system psychologically a deterrent. For a lender this means that the effect does not depend on the size of the database, and that it is worth telling borrowers about the scan openly.</p>
-<h2>Later: sharing without sharing data</h2>
+<h2>Later: a shared check without sharing names or images</h2>
 <p>Fraudsters move between lenders: a borrower blocked by one microfinance institution goes to the next one, and one lender's database cannot see that. A shared check needs several lenders on the same system, so it is the second step, not the first. How can lenders ask "does this person have an open loan elsewhere?" without handing each other names, photos or iris images? This is the question we worked on in INGRESS, a project funded by the EU's NGI ONTOCHAIN program. In INGRESS we built a biometric bureau that issues W3C Verifiable Credentials bound to the borrower's biometrics, so a person who loses a private key can prove their identity and get a new one. Next to it we built a prototype of a credit bureau that keeps the loan history and writes a hash of every loan to a public blockchain, so a credit history can be checked for tampering without disclosing anyone's private data.</p>
 
 <h2>Doing it on a small budget</h2>
@@ -134,12 +134,12 @@
 <h3>Losing money to duplicate borrowers?</h3>
 <p>We help lenders and fintechs add face and iris verification to onboarding and agent networks, and run a de-duplication audit of the existing customer base.</p>
 <p class="cta-kit">Buy a <a href="/iris-scanners">supported USB iris scanner</a> yourself and <a href="/get-started?interest=trial">request a 14-day trial</a>, or let us ship everything: the <a href="/pricing#starter">$590 starter kit</a> has a scanner, three months of the cloud and setup.</p>
-<p><a class="btn" href="/get-started">Discuss your use case</a> <a class="btn ghost" href="https://docs.iriscan.com/sdk">Biometric SDK docs</a></p>
+<p><a class="btn" href="/get-started?interest=pilot">Discuss your use case</a> <a class="btn ghost" href="https://docs.iriscan.com/sdk">Biometric SDK docs</a></p>
 </aside>
 <div class="readnext"><h3>Read next</h3><ul>
 <li><a href="/post/how-does-iris-recognition-work">How Does Iris Recognition Work</a></li>
 <li><a href="/post/the-power-of-the-eye-iris-identification">Iris Identification at National Scale</a></li>
-<li><a href="/biometrics-identity-verification-system">Biometrics Identity Verification System</a></li>
+<li><a href="/biometrics-identity-verification-system">Biometric Identity Verification System</a></li>
 </ul></div>
 </article></div>
 <footer>
@@ -171,5 +171,6 @@
 <div id="ckbar" hidden role="dialog" aria-label="Cookie consent"><span>Allow analytics cookies? <a href="/privacy#cookies">Privacy</a></span><button id="ckno">Decline</button><button id="ckyes">Accept</button></div>
 <script>(function(){var y=document.querySelectorAll('.yr');for(var i=0;i<y.length;i++)y[i].textContent=new Date().getFullYear();})();</script>
 <script src="/assets/currency.js?v=4" defer></script>
+<script src="/assets/nav.js" defer></script>
 <script src="/assets/consent.js" defer></script>
 </body></html>

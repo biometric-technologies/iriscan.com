@@ -14,7 +14,7 @@
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/assets/style.css?v=20261105f">
+<link rel="stylesheet" href="/assets/style.css?v=20261105g">
 <link rel="preload" as="image" href="/assets/img/iriscan-particle-wave-background.webp" fetchpriority="high">
 <link rel="canonical" href="https://www.iriscan.com/solutions/healthcare">
 <meta property="og:type" content="website">
@@ -30,8 +30,8 @@
   <div class="wrap nav">
     <a class="brand" href="/"><svg class="brand-icon" viewBox="37.65 43.294 511.585 511.598" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="293.44" cy="299.1" r="136" fill="#fff"/><path d="M536.34 219.06c-21.16 64.09-66.99 116.98-126.25 147.41-1.93-39.3-12.98-78.7-33.99-115.1-21.01-36.38-49.62-65.68-82.65-86.98-56-36.11-124.74-49.37-190.87-35.61C181.54 40.09 314.45 15.9 421.32 77.6c24.26 14 45.35 31.37 63.03 51.2 23.61 26.48 41.15 57.31 51.99 90.26z" fill="#5cc8ff"/><path d="M176.78 366.45c-3.29 66.55 19.62 132.7 64.57 183.09-25.98-5.39-51.55-14.96-75.79-28.96C58.7 458.9 13.21 331.71 50.51 218.98c5.39-16.31 12.52-32.31 21.45-47.76 8.92-15.46 19.2-29.62 30.62-42.44 66.13-13.75 134.87-.5 190.87 35.61-33.06 21.3-61.66 50.57-82.67 86.98-21.02 36.4-32.07 75.81-34 115.08z" fill="#1c77c3"/><path d="M514.93 426.97c-37.9 65.68-100.54 108.15-169.36 122.51-33.97 7.09-69.46 7.32-104.22.06-44.95-50.39-67.86-116.54-64.57-183.09 34.99 17.97 74.64 28.1 116.66 28.1s81.67-10.13 116.64-28.08c59.27-30.43 105.1-83.32 126.25-147.41 22 66.76 16.51 142.25-21.4 207.91z" fill="#0a328f"/></svg><span>IRISCAN</span></a>
     <input type="checkbox" id="navtoggle">
-    <label class="burger" for="navtoggle">&#9776;</label>
-    <nav class="menu">
+    <label class="burger" for="navtoggle" role="button" tabindex="0" aria-controls="site-menu" aria-expanded="false" aria-label="Open navigation">&#9776;</label>
+    <nav class="menu" id="site-menu" aria-label="Main">
       <div class="has-sub">
         <a href="/solutions/fintech">Solutions</a>
         <div class="sub">
@@ -87,7 +87,7 @@
 <p class="sol-eyebrow">Solutions · Hospitals and medical records</p>
 <h1 class="anim a-left">One patient, one record, the right treatment</h1>
 <p class="lead lead-big anim a-left" style="--d:.2s">Biometric patient identification for hospitals, clinic networks and national health record programs: one record per patient, found by the person rather than by a name or a card.</p>
-<p class="sol-actions"><a class="btn" href="/get-started">Discuss your hospital</a> <a class="btn ghost" href="/post/patient-identification-duplicate-medical-records-biometrics">Read: duplicate records and impersonation</a></p>
+<p class="sol-actions"><a class="btn" href="/get-started?interest=pilot">Discuss your hospital</a> <a class="btn ghost" href="/post/patient-identification-duplicate-medical-records-biometrics">Read: duplicate records and impersonation</a></p>
 </div></section>
 
 <section><div class="wrap sol">
@@ -116,12 +116,12 @@
 <h2>What you get</h2>
 <div class="sol-cards">
 <div class="sol-card"><h3>Identification at registration</h3><p>The patient looks at a scanner, and the system returns the record. No spelling of names, no searching by date of birth, no card to forget.</p></div>
-<div class="sol-card"><h3>No duplicate records</h3><p>Every new registration is searched against all enrolled patients, so a returning patient does not get a second record by accident, and getting one on purpose becomes much harder. Existing duplicates surface as patients come back.</p></div>
+<div class="sol-card"><h3>No duplicate records</h3><p>Every new registration is searched against all enrolled patients, so a returning patient does not get a second record by accident, and getting one on purpose becomes much harder. Older duplicate files are found when a returning patient is linked to them: staff confirm which existing records belong to the person, and those records are merged under one enrollment.</p></div>
 <div class="sol-card"><h3>Checks where errors are made</h3><p>The same identification before medication, transfusion, sample collection and procedures, on a tablet at the bedside or a scanner in the lab.</p></div>
 <div class="sol-card"><h3>Verified encounters for billing</h3><p>The visit record carries the biometric check, so claims to insurers and national schemes are backed by proof that the patient was there. See <a href="/solutions/health-insurance">health insurance</a>.</p></div>
 </div>
 
-<figure class="sol-fig"><img src="/assets/img/patient-identification-flow.webp?v=6" alt="Name search returns three records, iris search returns one" loading="lazy"><figcaption>The record is found by the person, not by a name, a card or a date of birth. <span class="fig-credit">Eye photo: <a href="https://commons.wikimedia.org/wiki/File:IRiris.jpg" rel="noopener">Boodlemason</a>, Wikimedia Commons, <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="noopener">CC BY-SA 3.0</a>.</span></figcaption></figure>
+<figure class="sol-fig"><img src="/assets/img/patient-identification-flow.webp?v=6" alt="Name search returns three records, iris search returns one" loading="lazy"><figcaption>The record is found by the person, not by a name, a card or a date of birth. Older duplicate files are linked and merged by staff once. <span class="fig-credit">Eye photo: <a href="https://commons.wikimedia.org/wiki/File:IRiris.jpg" rel="noopener">Boodlemason</a>, Wikimedia Commons, <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="noopener">CC BY-SA 3.0</a>.</span></figcaption></figure>
 
 <h2>Why iris</h2>
 <p>A hospital needs contactless identification, and it needs it to work for the elderly, for manual workers with worn fingerprints and for patients who cannot hold a finger still. Iris is captured from a distance, changes little over adult life and separates people well enough to search a whole regional patient register. Face is available as a second modality for patients who cannot open their eyes for the scanner.</p>
@@ -133,7 +133,7 @@
 </div>
 
 <h2>How we start</h2>
-<p>We recommend starting with the registration desks of one facility. For a few weeks returning patients are enrolled as they come, and the system reports how many of them already have more than one record. This number is a clear argument for the rest of the rollout.</p>
+<p>We recommend starting with the registration desks of one facility. For a few weeks returning patients are enrolled as they come, staff link each one to the files found under their name and documents, and you count how many of these patients turn out to have more than one record. This number is a clear argument for the rest of the rollout.</p>
 
 <aside class="cta">
 <h3>Fighting duplicate records or patient impersonation?</h3>
@@ -173,5 +173,6 @@
 <div id="ckbar" hidden role="dialog" aria-label="Cookie consent"><span>Allow analytics cookies? <a href="/privacy#cookies">Privacy</a></span><button id="ckno">Decline</button><button id="ckyes">Accept</button></div>
 <script>(function(){var y=document.querySelectorAll('.yr');for(var i=0;i<y.length;i++)y[i].textContent=new Date().getFullYear();})();</script>
 <script src="/assets/currency.js?v=4" defer></script>
+<script src="/assets/nav.js" defer></script>
 <script src="/assets/consent.js" defer></script>
 </body></html>
