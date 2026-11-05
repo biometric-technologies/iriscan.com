@@ -1,6 +1,6 @@
 /* Iriscan BDI — in-browser conversion demo.
- * WebAssembly build of NIST NBIS (WSQ, MINDTCT) + NIST BiomDI (FMR),
- * following biometric-technologies/biometric-converter. Nothing is uploaded. */
+ * biometric-technologies/biometric-converter (NIST NBIS MINDTCT + NIST BiomDI)
+ * compiled to WebAssembly; see tools/bdi-wasm. Nothing is uploaded. */
 (function () {
   'use strict';
   var root = document.getElementById('bdi');
@@ -21,13 +21,13 @@
     if (loading) return loading;
     loading = new Promise(function (res, rej) {
       function init() {
-        window.BiometricConverter({ locateFile: function (p) { return BASE + p; },
+        window.BiometricConverter({ locateFile: function (p) { return BASE + p + '?v=2'; },
           print: function () {}, printErr: function (t) { console.debug('[bdi]', t); } })
           .then(function (m) { M = m; loading = null; res(m); }, rej);
       }
       if (window.BiometricConverter) return init();
       var s = document.createElement('script');
-      s.src = BASE + 'bc.js'; s.onload = init;
+      s.src = BASE + 'bc.js?v=2'; s.onload = init;
       s.onerror = function () { rej(new Error('Could not load the converter.')); };
       document.head.appendChild(s);
     });
@@ -71,10 +71,10 @@
   }
   function extract(img, fmt) {
     return guarded(function () {
-      var pin = put(img.raw), p = ptrs(3), r;
+      var pin = put(img.raw), p = ptrs(2), r;
       try {
-        r = M.ccall('bc_raw2fmr', 'number', ['number', 'number', 'number', 'number', 'string', 'number', 'number', 'number'],
-          [pin, img.w, img.h, img.ppi || 500, fmt, p[0], p[1], p[2]]);
+        r = M.ccall('bc_raw2fmr', 'number', ['number', 'number', 'number', 'number', 'string', 'number', 'number'],
+          [pin, img.w, img.h, img.ppi || 500, fmt, p[0], p[1]]);
         if (r) throw cerr(r);
         return take(i32(p[0]), i32(p[1]));
       } finally { freeAll([pin].concat(p)); }
@@ -191,7 +191,8 @@
     $('#bdi-tpl-n').textContent = i.minutiae.length + ' (' +
       i.minutiae.filter(function (m) { return m.type === 1; }).length + ' ridge endings, ' +
       i.minutiae.filter(function (m) { return m.type === 2; }).length + ' bifurcations)';
-    $('#bdi-tpl-q').textContent = i.quality;
+    // The converter does not compute an overall finger quality and writes 0
+    $('#bdi-tpl-q').textContent = i.quality || 'not set (0)';
     $('#bdi-b64').textContent = b64(tpl.bytes);
     $('#bdi-to-iso').disabled = i.std === 'ISO';
     $('#bdi-to-ansi').disabled = i.std === 'ANSI';
