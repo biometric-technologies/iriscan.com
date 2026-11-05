@@ -93,8 +93,28 @@
   }
 
   /* ---------- FMR parsing (ISO/IEC 19794-2:2005, ANSI INCITS 378-2004) ---------- */
+  var CARD_PPCM = 197; // card records carry no resolution; 500 ppi, as the converter assumes
+  function hasHeader(b) { return b.length >= 4 && b[0] === 0x46 && b[1] === 0x4D && b[2] === 0x52 && b[3] === 0; }
+  // Card records: minutiae only. Normal card: 5 bytes per minutia (type and x,
+  // y, angle in 1/256 turns), positions in 0.01 mm. Compact card: 3 bytes
+  // (x, y in 0.1 mm, type and angle in 1/64 turns).
+  function parseCard(b, std) {
+    var size = std === 'ISONC' ? 5 : 3, unit = std === 'ISONC' ? 0.01 : 0.1;
+    if (!b.length || b.length % size) throw new Error('The file size does not fit a ' + (std === 'ISONC' ? 'normal' : 'compact') + ' card record (' + size + ' bytes per minutia).');
+    var pxPerMm = (state.img && state.img.ppi ? state.img.ppi / 25.4 : CARD_PPCM / 10), list = [];
+    for (var o = 0; o < b.length; o += size) {
+      var x, y, type, deg;
+      if (size === 5) { type = b[o] >> 6; x = ((b[o] & 0x3f) << 8) | b[o + 1]; y = ((b[o + 2] & 0x3f) << 8) | b[o + 3]; deg = b[o + 4] * 360 / 256; }
+      else { x = b[o]; y = b[o + 1]; type = b[o + 2] >> 6; deg = (b[o + 2] & 0x3f) * 360 / 64; }
+      list.push({ type: type, x: Math.round(x * unit * pxPerMm), y: Math.round(y * unit * pxPerMm), deg: deg, q: null });
+    }
+    var res = state.img && state.img.ppi ? Math.round(state.img.ppi / 2.54) : CARD_PPCM;
+    return { std: std, card: true, length: b.length, w: state.img ? state.img.w : 0, h: state.img ? state.img.h : 0,
+             xres: res, yres: res, views: 1, finger: 0, quality: null, minutiae: list };
+  }
+  function parseTemplate(b, std) { return hasHeader(b) ? parseFMR(b) : parseCard(b, std); }
   function parseFMR(b) {
-    if (b.length < 24 || b[0] !== 0x46 || b[1] !== 0x4D || b[2] !== 0x52 || b[3] !== 0)
+    if (b.length < 24 || !hasHeader(b))
       throw new Error('Not a finger minutiae record (no “FMR” header).');
     var dv = new DataView(b.buffer, b.byteOffset, b.byteLength), std, o;
     if (dv.getUint32(8) === b.length) { std = 'ISO'; o = 12; }
@@ -180,26 +200,29 @@
   }
   function renderTemplate() {
     var tpl = state.tpl, box = $('#bdi-tpl');
-    ['#bdi-to-iso', '#bdi-to-ansi', '#bdi-save-tpl', '#bdi-copy', '#bdi-overlay'].forEach(function (s) { $(s).disabled = !tpl; });
+    ['#bdi-to', '#bdi-convert', '#bdi-save-tpl', '#bdi-copy', '#bdi-overlay'].forEach(function (s) { $(s).disabled = !tpl; });
     if (!tpl) { box.hidden = true; $('#bdi-tpl-empty').hidden = false; return; }
-    var i = tpl.info, names = { ISO: 'ISO/IEC 19794-2:2005', ANSI: 'ANSI INCITS 378-2004' };
+    var i = tpl.info;
     $('#bdi-tpl-empty').hidden = true; box.hidden = false;
-    $('#bdi-tpl-std').textContent = names[i.std];
+    $('#bdi-tpl-std').textContent = NAMES[i.std];
     $('#bdi-tpl-len').textContent = i.length + ' bytes';
-    $('#bdi-tpl-size').textContent = i.w + '×' + i.h + ' px';
-    $('#bdi-tpl-res').textContent = i.xres + '×' + i.yres + ' px/cm (' + Math.round(i.xres * 2.54) + ' ppi)';
+    $('#bdi-tpl-size').textContent = i.card ? 'not stored in card records' : i.w + '×' + i.h + ' px';
+    $('#bdi-tpl-res').textContent = (i.card ? 'not stored; drawn at ' : '') + i.xres + '×' + i.yres + ' px/cm (' + Math.round(i.xres * 2.54) + ' ppi)';
     $('#bdi-tpl-n').textContent = i.minutiae.length + ' (' +
       i.minutiae.filter(function (m) { return m.type === 1; }).length + ' ridge endings, ' +
       i.minutiae.filter(function (m) { return m.type === 2; }).length + ' bifurcations)';
     // The converter does not compute an overall finger quality and writes 0
-    $('#bdi-tpl-q').textContent = i.quality || 'not set (0)';
+    $('#bdi-tpl-q').textContent = i.card ? 'not stored in card records' : (i.quality || 'not set (0)');
     $('#bdi-b64').textContent = b64(tpl.bytes);
-    $('#bdi-to-iso').disabled = i.std === 'ISO';
-    $('#bdi-to-ansi').disabled = i.std === 'ANSI';
+    var to = $('#bdi-to');
+    for (var k = 0; k < to.options.length; k++) to.options[k].disabled = to.options[k].value === i.std;
+    if (to.value === i.std) to.value = i.std === 'ISO' ? 'ANSI' : 'ISO';
   }
+  var NAMES = { ISO: 'ISO/IEC 19794-2:2005 record', ISONC: 'ISO/IEC 19794-2:2005 normal card', ISOCC: 'ISO/IEC 19794-2:2005 compact card', ANSI: 'ANSI INCITS 378-2004' };
+  var EXT = { ISO: '.ist', ISONC: '.isonc', ISOCC: '.isocc', ANSI: '.ansi' };
   function b64(u8) { var s = ''; for (var i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(s); }
-  function setTemplate(bytes, name) {
-    state.tpl = { bytes: bytes, info: parseFMR(bytes), name: name };
+  function setTemplate(bytes, name, std) {
+    state.tpl = { bytes: bytes, info: parseTemplate(bytes, std), name: name };
     renderTemplate(); draw();
   }
 
@@ -258,7 +281,7 @@
       var t0 = performance.now();
       return extract(state.img, fmt).then(function (bytes) {
         state.overlay = true; $('#bdi-overlay').checked = true;
-        setTemplate(bytes, stem() + (fmt === 'ISO' ? '.ist' : '.ansi'));
+        setTemplate(bytes, stem() + EXT[fmt], fmt);
         return state.tpl.info.minutiae.length + ' minutiae extracted in ' + Math.round(performance.now() - t0) + ' ms.';
       });
     });
@@ -282,7 +305,13 @@
     if (!f) return;
     busy(null, function () {
       return f.arrayBuffer().then(function (ab) {
-        setTemplate(new Uint8Array(ab), f.name);
+        var bytes = new Uint8Array(ab), ext = (f.name.split('.').pop() || '').toLowerCase(), std = null;
+        if (!hasHeader(bytes)) {
+          std = ext === 'isonc' ? 'ISONC' : ext === 'isocc' ? 'ISOCC' : $('#bdi-fmt').value;
+          if (std !== 'ISONC' && std !== 'ISOCC')
+            throw new Error('No “FMR” header. If this is a card record, choose its card format under Template format and open it again.');
+        }
+        setTemplate(bytes, f.name, std);
         return 'Template loaded: ' + state.tpl.info.minutiae.length + ' minutiae.' + (state.img ? '' : ' A template has no image, so only its minutiae are drawn.');
       });
     });
@@ -291,13 +320,15 @@
     var from = state.tpl.info.std;
     busy(null, function () {
       return fmr2fmr(state.tpl.bytes, from, to).then(function (bytes) {
-        setTemplate(bytes, stem() + (to === 'ISO' ? '.ist' : '.ansi'));
-        return 'Converted ' + from + ' → ' + to + '.';
+        var before = state.tpl.info.minutiae.length;
+        setTemplate(bytes, stem() + EXT[to], to);
+        var after = state.tpl.info.minutiae.length;
+        return 'Converted ' + from + ' → ' + to + '.' + (after < before ? ' ' + (before - after) +
+          ' minutiae beyond the 25.5 mm reach of the compact card were left out.' : '');
       });
     });
   }
-  $('#bdi-to-iso').addEventListener('click', function () { convertTo('ISO'); });
-  $('#bdi-to-ansi').addEventListener('click', function () { convertTo('ANSI'); });
+  $('#bdi-convert').addEventListener('click', function () { convertTo($('#bdi-to').value); });
   $('#bdi-save-tpl').addEventListener('click', function () { download(state.tpl.bytes, state.tpl.name); status('Template saved.'); });
   $('#bdi-copy').addEventListener('click', function () {
     navigator.clipboard.writeText(b64(state.tpl.bytes)).then(function () { status('Base64 copied.'); }, function () { status('Copy failed.', true); });

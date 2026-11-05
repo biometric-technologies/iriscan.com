@@ -52,6 +52,7 @@
 .bdi-mid{align-self:center;display:flex;flex-direction:column;gap:.6rem}
 .bdi-mid label{color:var(--muted);font-size:.82rem}
 .bdi-mid select{background:var(--bg-soft);color:#fff;border:1px solid #6e7178;border-radius:4px;padding:.5rem;font:inherit;font-size:.9rem}
+.bdi-card .bdi-actions select{background:var(--bg-soft);color:#fff;border:1px solid #6e7178;border-radius:4px;padding:.55rem;font:inherit;font-size:.9rem;flex:1 1 12rem;min-width:0}
 .bdi-mid .btn{width:100%;padding:.8rem 1rem;font-size:.95rem}
 .bdi-note{color:var(--muted);font-size:.78rem;line-height:1.55;margin:.4rem 0 0}
 .bdi-dl{display:grid;grid-template-columns:auto 1fr;gap:.3rem .9rem;font-size:.85rem;margin:0 0 .9rem}
@@ -180,12 +181,12 @@ val out = sdk.io().writeRecord(record)</code></pre>
 </div>
 <div class="bdi-mid">
 <label for="bdi-fmt">Template format</label>
-<select id="bdi-fmt"><option value="ISO">ISO/IEC 19794-2</option><option value="ANSI">ANSI INCITS 378</option></select>
+<select id="bdi-fmt"><option value="ISO">ISO/IEC 19794-2 record</option><option value="ISONC">ISO/IEC 19794-2 normal card</option><option value="ISOCC">ISO/IEC 19794-2 compact card</option><option value="ANSI">ANSI INCITS 378</option></select>
 <button type="button" class="btn" id="bdi-extract" disabled>Extract minutiae <span aria-hidden="true">→</span></button>
 <p class="bdi-note">Back from a template you get its minutiae, drawn on the left. A template holds features, not the original image. It is still biometric data: research has shown that a usable fingerprint image can be reconstructed from minutiae, so templates need the same protection as images.</p>
 </div>
 <div class="bdi-card">
-<div class="bdi-title"><h3>Minutiae template</h3><span>ISO 19794-2 · ANSI 378</span></div>
+<div class="bdi-title"><h3>Minutiae template</h3><span>ISO 19794-2 (record, cards) · ANSI 378</span></div>
 <p id="bdi-tpl-empty" class="bdi-empty">Extract minutiae from the image or open a template file.</p>
 <div id="bdi-tpl" hidden>
 <dl class="bdi-dl">
@@ -199,8 +200,8 @@ val out = sdk.io().writeRecord(record)</code></pre>
 <code class="blob" id="bdi-b64"></code>
 </div>
 <div class="bdi-actions">
-<button type="button" class="btn ghost" id="bdi-to-iso" disabled>To ISO 19794-2</button>
-<button type="button" class="btn ghost" id="bdi-to-ansi" disabled>To ANSI 378</button>
+<select id="bdi-to" aria-label="Convert the template to"><option value="ISO">To ISO 19794-2 record</option><option value="ISONC">To ISO normal card</option><option value="ISOCC">To ISO compact card</option><option value="ANSI">To ANSI 378</option></select>
+<button type="button" class="btn ghost" id="bdi-convert" disabled>Convert</button>
 </div>
 <div class="bdi-actions">
 <button type="button" class="btn ghost" id="bdi-open-tpl">Open template…</button>
@@ -211,7 +212,7 @@ val out = sdk.io().writeRecord(record)</code></pre>
 </div>
 <p id="bdi-status" class="bdi-status" role="status" aria-live="polite"></p>
 </div>
-<p class="bdi-foot">Production BDI converts enterprise batches through the same engine on-premises or in the cloud, including ANSI/NIST-ITL records and ISO card formats. <a href="https://github.com/biometric-technologies/biometric-converter">Source on GitHub</a>.</p>
+<p class="bdi-foot">Card records (normal and compact) have no header, so to open one, choose its card format under Template format first, or give the file an .isonc or .isocc extension. Production BDI converts enterprise batches through the same engine on-premises or in the cloud, including ANSI/NIST-ITL records. <a href="https://github.com/biometric-technologies/biometric-converter">Source on GitHub</a>.</p>
 <div class="grid g2" style="max-width:640px;margin:2.5rem auto 0">
 <figure style="margin:0"><img src="assets/img/european-union-emblem.jpg" alt="European Union emblem for NGI supported biometric data portability project" loading="lazy"></figure>
 <figure style="margin:0"><img src="assets/img/ngi-supported-by-logo.png" alt="Next Generation Internet NGI supported by logo" loading="lazy"></figure>
@@ -220,7 +221,7 @@ val out = sdk.io().writeRecord(record)</code></pre>
 <p style="margin-top:1.5rem;text-align:center"><a class="btn" href="/get-started?interest=bdi">Request Conversion</a></p>
 <div class="wrap" style="max-width:900px"><figure class="yt-fig"><button class="yt" type="button" aria-label="Play video: Fingerprint conversion from WSQ to ANSI INCITS 378-2004 or ISO/IEC 19794-2:2005" style="background-image:url(https://i.ytimg.com/vi/Ke1P1PfEm30/hqdefault.jpg)" onclick="this.outerHTML='<iframe src=&quot;https://www.youtube-nocookie.com/embed/Ke1P1PfEm30?autoplay=1&amp;rel=0&quot; title=&quot;Fingerprint conversion from WSQ to ANSI INCITS 378-2004 or ISO/IEC 19794-2:2005&quot; allow=&quot;autoplay; encrypted-media; picture-in-picture&quot; allowfullscreen></iframe>'"><span></span></button><figcaption>Video: Fingerprint conversion from WSQ to ANSI INCITS 378-2004 or ISO/IEC 19794-2:2005</figcaption></figure>
 </div></div></section>
-<script src="assets/bdi/demo.js?v=2" defer></script>
+<script src="assets/bdi/demo.js?v=3" defer></script>
 <footer>
   <div class="wrap cols">
     <div>
