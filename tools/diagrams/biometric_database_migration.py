@@ -65,8 +65,10 @@ def minutiae(cx, cy):
     marks = []
     def mark(x, y, ang):
         tx, ty = x + 11 * math.cos(math.radians(ang)), y - 11 * math.sin(math.radians(ang))
-        marks.append(f'<path d="M{x:.1f} {y:.1f} L{tx:.1f} {ty:.1f}" stroke="#5cc8ff" stroke-width="3" stroke-linecap="round"/>'
-                     f'<circle cx="{x:.1f}" cy="{y:.1f}" r="5" fill="#5cc8ff"/>')
+        # red, as minutiae are drawn in the BDI demo, with a dark rim so they stand off the white ridges
+        marks.append(f'<path d="M{x:.1f} {y:.1f} L{tx:.1f} {ty:.1f}" stroke="#303033" stroke-width="7" stroke-linecap="round"/>'
+                     f'<path d="M{x:.1f} {y:.1f} L{tx:.1f} {ty:.1f}" stroke="#ff4d4d" stroke-width="3.5" stroke-linecap="round"/>'
+                     f'<circle cx="{x:.1f}" cy="{y:.1f}" r="6.5" fill="#ff4d4d" stroke="#303033" stroke-width="2.5"/>')
     (x, y), _ = ends[3]          # ridge ending on ring 17
     mark(x, y, -30)
     (x, y), _ = ends[8]          # ridge ending on ring 29
