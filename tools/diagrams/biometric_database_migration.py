@@ -40,8 +40,7 @@ def _arc(cx, cy, rx, ry, a0, a1, n=24):
 
 
 def minutiae(cx, cy):
-    """A fingerprint (whorl of broken ridges) with three minutiae marked:
-    ridge endings and a bifurcation, each with its direction."""
+    """A fingerprint: a whorl of broken ridges with a bifurcation."""
     import math
     cy += 4
     st = 'fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round"'
@@ -75,7 +74,7 @@ def minutiae(cx, cy):
     mark(x, y, 160)
     mark(bx, by, 50)             # bifurcation
     clip = f'<clipPath id="fp{cx:.0f}{cy:.0f}"><ellipse cx="{cx}" cy="{cy}" rx="36" ry="44"/></clipPath>'
-    return f'<defs>{clip}</defs><g clip-path="url(#fp{cx:.0f}{cy:.0f})">' + ''.join(paths) + '</g>' + ''.join(marks)
+    return f'<defs>{clip}</defs><g clip-path="url(#fp{cx:.0f}{cy:.0f})">' + ''.join(paths) + '</g>'
 
 
 def key(cx, cy):
