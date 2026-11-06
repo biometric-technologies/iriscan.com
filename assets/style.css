@@ -815,3 +815,10 @@ footer .copyright{margin:.9rem 0 0;font-size:.85rem}
   .hero-parallax{min-height:0;padding:56px 0 3.5rem}
   .hero-parallax + section{padding-top:3rem}
 }
+
+/* home: card photos and icons link to the page of their card (2026-11-06) */
+a.img-link{display:block;width:fit-content;text-decoration:none}
+.sol-card a.img-link:has(.sol-photo){width:auto}
+a.img-link img{transition:opacity .2s,filter .2s}
+a.img-link:hover img{opacity:1;filter:saturate(1) brightness(1.04)}
+a.img-link:hover .sol-photo{filter:saturate(1) brightness(1)}
