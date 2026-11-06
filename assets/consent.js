@@ -61,11 +61,11 @@
   else if (choice !== 'denied' && GA_ID) show();
 
   // "Cookie settings" link in the footer reopens the banner
-  var foot = document.querySelector('footer ul');
+  var foot = document.querySelector('footer ul.foot-legal');
   if (foot && bar && GA_ID) {
     var li = document.createElement('li'), a = document.createElement('a');
     a.href = '#'; a.textContent = 'Cookie settings';
     a.onclick = function (e) { e.preventDefault(); show(); };
-    li.appendChild(a); foot.insertBefore(li, foot.children[2] || null);
+    li.appendChild(a); foot.insertBefore(li, foot.children[1] || null);
   }
 })();
