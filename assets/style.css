@@ -777,31 +777,36 @@ section.before-footer{padding-bottom:1.5rem}
 @media(min-width:901px){.article .portrait-intro{grid-template-columns:minmax(0,48%) minmax(0,1fr);align-items:stretch}.article figure.portrait-photo{display:flex;flex-direction:column;max-width:none}.article .portrait-photo img{flex:1 1 0;height:0;min-height:0;aspect-ratio:auto;object-position:62% 30%}}
 .sol-stats:has(>div:nth-child(2):last-child){grid-template-columns:repeat(2,1fr)}
 
-/* footer (2026-11-06): identity and contact on the left, three link columns, a bottom bar with
-   the copyright and the social icons. One grid that folds to two and then one column. */
-footer .foot{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,2fr);gap:2.5rem 4rem;max-width:var(--max)}
+/* footer (2026-11-06): one row. Left: logo, address, social icons, copyright; right: three
+   link columns. On phones the Products and Company columns (the same links as the menu) are
+   hidden and the rest is a short centred block with the legal links on one line. */
+footer .foot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:2rem 4rem;align-items:start;max-width:var(--max)}
 footer a{color:var(--muted)}
 footer a:hover{color:#fff;text-decoration:none}
 footer .brand{font-size:1.35rem;line-height:1.1}
-footer .foot-id p{margin:1.2rem 0 1.4rem;line-height:1.7}
-footer .foot-id a.btn{color:#fff;padding:.7rem 1.4rem;font-size:.95rem}
-footer .foot-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem}
+footer .foot-addr{margin:1.1rem 0 1.1rem;line-height:1.65}
+footer .foot-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem;padding-top:.3rem}
 footer .foot-h{margin:0 0 .9rem;color:#fff;font-weight:600;font-size:.95rem}
 footer ul{list-style:none;margin:0;padding:0}
 footer li{margin:0 0 .65rem}
-footer .foot-bottom{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:1rem;
-  padding-top:1.6rem;border-top:1px solid rgba(255,255,255,.07)}
-footer .copyright{margin:0;font-size:.85rem}
+footer .copyright{margin:.9rem 0 0;font-size:.85rem}
 .socials{display:flex;gap:.7rem;margin:0}
 .socials img{width:28px;height:28px;border-radius:50%;opacity:.75}
 .socials a:hover img{opacity:1}
-@media(max-width:900px){
-  footer .foot{grid-template-columns:1fr;gap:2.2rem}
-}
-@media(max-width:560px){
-  footer{margin-top:0;padding:2.8rem 0 5.5rem} /* bottom room for the cookie bar */
-  footer .foot-links{grid-template-columns:1fr 1fr;gap:1.8rem 1rem}
-  footer .foot-bottom{flex-direction:column-reverse;align-items:flex-start;gap:1rem}
+@media(max-width:700px){
+  footer{margin-top:0;padding:2.2rem 0 5rem;font-size:.88rem;text-align:center} /* bottom room for the cookie bar */
+  footer .foot{display:flex;flex-direction:column;align-items:center;gap:0}
+  footer .foot-id{display:contents}
+  footer .brand{order:1;justify-content:center;font-size:1.2rem}
+  footer .brand svg.brand-icon{width:28px;height:28px}
+  footer .foot-addr{order:2;margin:.8rem 0 .9rem;line-height:1.55}
+  footer .foot-links{order:3;display:block;padding:0}
+  footer .foot-links>div:not(.foot-legal-col),footer .foot-h{display:none}
+  footer .foot-legal{display:flex;flex-wrap:wrap;justify-content:center;gap:.35rem 1.1rem}
+  footer .foot-legal li{margin:0}
+  footer .socials{order:4;justify-content:center;margin-top:1.1rem}
+  footer .socials img{width:26px;height:26px}
+  footer .copyright{order:5;margin-top:.8rem;font-size:.8rem}
 }
 
 /* home hero on phones and tablets: as tall as its content. The full-screen height left an empty
